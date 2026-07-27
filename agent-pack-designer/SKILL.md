@@ -15,7 +15,7 @@ Use the smallest pack that can route work and validate claims:
 - `CLAUDE.md` only when Claude Code is an explicit target runtime.
 - `agents/context_router.md` to choose the minimum useful context.
 - `agents/<primary_workflow_agent>.md` for the main project workflow.
-- `agents/<risk_or_domain_reviewer>.md` for the most relevant project risk or domain review lens.
+- `agents/<risk_or_domain_reviewer>.md` only when a concrete recurring risk or domain review workflow justifies it.
 - `agents/validation_reviewer.md` to judge evidence level; `agents/test_validation.md` is an acceptable project-specific alias.
 - `agents/task_spec_short.md` for non-trivial tasks.
 
@@ -25,13 +25,14 @@ Use `assets/starter-pack/` as the base structure, then rename placeholder agents
 
 Classify files before adding them:
 
-- Core: `AGENTS.md`, `agents/context_router.md`, one primary agent, one risk or domain reviewer, validation reviewer, and `agents/task_spec_short.md`.
+- Core: `AGENTS.md`, `agents/context_router.md`, one primary agent, validation reviewer, and `agents/task_spec_short.md`.
+- Conditional reviewer: add one risk or domain reviewer only when current project evidence shows a recurring risk or review workflow.
 - Claude-specific: `CLAUDE.md` and `.claude/agents/` only when Claude Code compatibility is required.
 - Trigger-only domain agents: add when a mature project has recurring tasks that need distinct context, such as data quality, feature engineering, CV, model training, API runtime, documentation handoff, or submission building.
 - Additional trigger-only risk reviewers: add only when a concrete risk deserves a separate review lens, such as leakage, security, reproducibility, metrics, red-team, or public release.
 - Optional/future agents: omit from the default pack unless the project already has an active workflow for that area.
 
-Many agents are acceptable for mature projects only when `context_router.md` keeps the default context to one primary agent plus one reviewer.
+Many agents are acceptable for mature projects only when `context_router.md` keeps the default context to one primary agent plus zero or one triggered reviewer.
 
 ## Workflow
 
@@ -40,7 +41,7 @@ Many agents are acceptable for mature projects only when `context_router.md` kee
    - `references/design-workflow.md` when generating or restructuring a pack.
    - `references/agent-quality-rubric.md` when reviewing agent quality.
    - `references/validation-levels.md` before assigning L0-L5 or release readiness.
-3. Choose the smallest useful pack. Include one primary agent and one reviewer, then add any extra agent only when it has a distinct trigger, inputs, checklist, output, stop rule, and routing entry.
+3. Choose the smallest useful pack. Include one primary agent and validation reviewer; add a risk or domain reviewer only when it has a distinct trigger, inputs, checklist, output, stop rule, and routing entry.
 4. Fill the starter templates with project-specific names, files, commands, forbidden changes, and acceptance criteria.
 5. Select the validation profile before running static checks:
    - `generated-pack` for a materialized project pack;
@@ -55,7 +56,7 @@ Many agents are acceptable for mature projects only when `context_router.md` kee
 
 ## Generation Rules
 
-- Prefer one primary implementation agent plus one reviewer. Do not add agents for hypothetical future tasks.
+- Prefer one primary implementation agent plus a reviewer only when a concrete recurring risk or domain workflow justifies it. Do not add agents for hypothetical future tasks.
 - For mature projects, allow multiple trigger-only domain agents when a router prevents loading them all by default.
 - Keep implementation, review, validation, and red-team responsibilities separate.
 - Keep agents project-specific. Avoid generic agents that could apply to every repository.

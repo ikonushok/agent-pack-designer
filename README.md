@@ -12,7 +12,7 @@ It helps produce:
 - [`CLAUDE.md`](CLAUDE.md) for Claude Code project memory.
 - [`agents/context_router.md`](agent-pack-designer/assets/starter-pack/agents/context_router.md) for choosing the minimum useful context.
 - one primary project-specific workflow agent.
-- one risk or domain reviewer.
+- one risk or domain reviewer only when a concrete recurring risk or review workflow justifies it.
 - [`agents/validation_reviewer.md`](agent-pack-designer/assets/starter-pack/agents/validation_reviewer.md) for evidence and validation claims.
 - [`agents/task_spec_short.md`](agent-pack-designer/assets/starter-pack/agents/task_spec_short.md) for non-trivial tasks.
 - optional extra agents only when current project evidence justifies them.
@@ -34,7 +34,7 @@ Use `agent-pack-designer` in two main situations:
 
 | Situation | Use this path | Expected result |
 |---|---|---|
-| You are starting from a project description, README, technical spec, or lightly documented repository | Create a new minimal pack | A small generated pack with one primary agent, one reviewer, validation ownership, and clear Codex/Claude support boundaries |
+| You are starting from a project description, README, technical spec, or lightly documented repository | Create a new minimal pack | A small generated pack with one primary agent, validation ownership, optional reviewer when justified, and clear Codex/Claude support boundaries |
 | Your project already has agents, reviewers, routing files, Claude files, or project memory | Audit the existing mature pack first | A read-only diagnosis of routing, role separation, validation claims, token economy, and the smallest justified update |
 
 The safest first run for a new user is an audit or proposal before adding files:
@@ -138,11 +138,11 @@ A generated project pack should normally contain:
     agents/
       context_router.md
       primary_agent.md
-      risk_reviewer.md
+      risk_reviewer.md          # only when a concrete risk or domain review workflow is justified
       validation_reviewer.md
       task_spec_short.md
 
-Rename [`primary_agent.md`](agent-pack-designer/assets/starter-pack/agents/primary_agent.md) and [`risk_reviewer.md`](agent-pack-designer/assets/starter-pack/agents/risk_reviewer.md) to project-specific names when the target project has clear domain language. Keep one risk or domain reviewer in every generated pack. When no single specialized risk dominates, keep it as a lightweight general project risk reviewer rather than adding multiple speculative reviewers.
+Rename [`primary_agent.md`](agent-pack-designer/assets/starter-pack/agents/primary_agent.md) to a project-specific name when the target project has clear domain language. Include and rename [`risk_reviewer.md`](agent-pack-designer/assets/starter-pack/agents/risk_reviewer.md) only when a concrete recurring risk or domain review workflow is justified. When no specialized risk dominates, rely on `validation_reviewer.md` rather than adding a lightweight general reviewer.
 
 ## Validation Levels
 
@@ -221,7 +221,7 @@ Customer reports are generated artifacts. They are examples and handoff outputs,
 ## Design Principles
 
 - Minimal context first.
-- One main agent, one reviewer, one validation path.
+- One main agent, one validation path, and a reviewer only when a concrete risk or domain workflow justifies it.
 - Project-specific agents stay inside the target project.
 - Separate implementation, review, validation, and red-team responsibilities.
 - Prefer revising existing agents before adding new ones.

@@ -10,7 +10,7 @@ This repository builds `agent-pack-designer`: a portable skill for designing min
 
 ## Working Rules
 
-1. Prefer a small pack: `AGENTS.md` / `CLAUDE.md`, `context_router.md`, one main agent, one reviewer, `validation_reviewer.md`, `task_spec_short.md`.
+1. Prefer a small pack: `AGENTS.md` / `CLAUDE.md`, `context_router.md`, one main agent, `validation_reviewer.md`, `task_spec_short.md`, and a reviewer only when a concrete recurring risk or domain workflow justifies it.
 2. Do not add agents for hypothetical future tasks.
 3. Separate implementation agents from reviewers.
 4. Keep `SKILL.md` concise; move details to `references/`.

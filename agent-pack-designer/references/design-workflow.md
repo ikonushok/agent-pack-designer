@@ -46,7 +46,7 @@ Add an agent only when all are true:
 - it has a concrete checklist or output format;
 - it reduces risk or repeated context loading.
 
-Default to one primary workflow agent, one concrete risk or domain reviewer, `validation_reviewer.md`, and `task_spec_short.md`.
+Default to one primary workflow agent, `validation_reviewer.md`, and `task_spec_short.md`. Add one concrete risk or domain reviewer only when project evidence shows a recurring review need.
 
 Classify every selected file:
 
@@ -58,7 +58,7 @@ Classify every selected file:
 | Trigger-only risk/review | A concrete recurring risk needs the required review lens or an additional separate review lens | leakage, metrics, reproducibility, red-team, docs/release |
 | Optional/future | The role is useful only for planned or rare work | observability, LTR/ranking, migration, future platform adapters |
 
-Many trigger-only agents are acceptable in a mature project if `context_router.md` explicitly prevents loading all agents by default and routes to one primary agent plus one reviewer.
+Many trigger-only agents are acceptable in a mature project if `context_router.md` explicitly prevents loading all agents by default and routes to one primary agent plus zero or one triggered reviewer.
 
 ## 5. Define Contracts
 

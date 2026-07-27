@@ -1,5 +1,7 @@
 # CLAUDE.md
 
+@AGENTS.md
+
 Project: {{PROJECT_NAME}}
 
 This file is the Claude Code project memory. Keep it concise and load extra docs only when the task requires them.
@@ -7,7 +9,7 @@ This file is the Claude Code project memory. Keep it concise and load extra docs
 ## Context Order
 
 1. Read this file for project rules.
-2. Read `AGENTS.md` when Codex compatibility or shared agent-pack behavior matters.
+2. Use the imported `AGENTS.md` content for shared Codex-compatible guidance.
 3. Read `agents/context_router.md` before choosing a specialized agent.
 4. Read one primary agent and, only when triggered, one reviewer.
 
