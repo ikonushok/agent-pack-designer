@@ -22,6 +22,7 @@
 | Release docs | `README.md`, `CHANGELOG.md`, `VERSION` | Документация релиза есть, текущая ветка уже содержит L1 evidence после тега |
 | Validation reports | `reports/validation/l1-agent-pack-comparison-2026-07-27.md` | Добавлен первый real-project validation report |
 | Git status на момент отчёта | Изменения отчёта, `README.md` и `CHANGELOG.md` подготовлены после тега | Эти изменения относятся к следующему commit после `v0.1.0` |
+| P1 guidance после отчёта | `SKILL.md` и references обновлены по findings | Добавлены категории agents, alias `test_validation.md`, правило про опциональный `CLAUDE.md` |
 
 ## Результаты проверки
 
@@ -44,26 +45,26 @@
 | Главный подтверждённый design choice | `AGENTS.md + context_router.md + primary agent + validation reviewer + task_spec_short.md` работает как core |
 | Главная поправка к skill | Для mature ML projects нужно разрешать много trigger-only agents, если router удерживает default context маленьким |
 | Главный найденный gap в starter guidance | Нужно явно описать категории `ядро`, `по триггеру`, `optional/future`, а также alias `test_validation.md` для validation reviewer |
-| Следующий engineering step | Обновить `SKILL.md` и references по findings, затем сделать materialized pack check для L2 |
+| Следующий engineering step | Сделать materialized pack check для L2 и добавить generated-pack consistency validator |
 
 ## Что делать дальше
 
 | Приоритет | Действие | Зачем | Ожидаемый результат |
 |---|---|---|---|
-| P0 | Закоммитить текущий отчёт, `README.md` и `CHANGELOG.md` отдельным commit после `v0.1.0` | Сохранить L1 evidence отдельно от L0 release tag | История Git разделяет release и последующую validation work |
-| P1 | Обновить `SKILL.md`: добавить правило `core / trigger-only / optional-future agents` | Закрыть главный вывод из трёх реальных проектов | Skill лучше масштабируется от starter-pack до mature ML pack |
-| P1 | Обновить references: добавить `test_validation.md` как допустимый alias для `validation_reviewer.md` | Убрать расхождение с реальными ML-проектами | Generated packs смогут использовать project-specific имя без нарушения workflow |
-| P1 | Уточнить в `SKILL.md`, что `CLAUDE.md` нужен только при явном target runtime Claude Code | Не заставлять каждый pack создавать лишний файл | Starter-pack остаётся минимальным |
-| P2 | Сгенерировать materialized pack в `/private/tmp` для одного из трёх проектов | Перейти от ручного сравнения к проверке результата генерации | Можно честнее заявить L2 |
-| P2 | Добавить generated-pack consistency validator | Сделать L2 повторяемым, а не ручным | Скрипт проверяет router, agent names, roles, validation claims |
+| P0 | Закоммитить текущий отчёт, `README.md` и `CHANGELOG.md` отдельным commit после `v0.1.0` | Сохранить L1 evidence отдельно от L0 release tag | Выполнено: commit `7284e14` |
+| P1 | Обновить `SKILL.md`: добавить правило `core / trigger-only / optional-future agents` | Закрыть главный вывод из трёх реальных проектов | Выполнено в рабочей ветке |
+| P1 | Обновить references: добавить `test_validation.md` как допустимый alias для `validation_reviewer.md` | Убрать расхождение с реальными ML-проектами | Выполнено в рабочей ветке |
+| P1 | Уточнить в `SKILL.md`, что `CLAUDE.md` нужен только при явном target runtime Claude Code | Не заставлять каждый pack создавать лишний файл | Выполнено в рабочей ветке |
+| P2 | Сгенерировать materialized pack в `/private/tmp` для одного из трёх проектов | Перейти от ручного сравнения к проверке результата генерации | Следующий шаг |
+| P2 | Добавить generated-pack consistency validator | Сделать L2 повторяемым, а не ручным | Следующий шаг |
 | P3 | Прогнать cross-project regression на всех трёх проектах после правок | Проверить, что новый guidance не ломает разные типы проектов | Подготовка к L4 |
 | P3 | Подготовить `v0.2.0` после L2 validator | Выпустить версию не только со scaffold, но и с evidence-driven generation checks | Release с более сильным validation story |
 
 | Рекомендуемый ближайший шаг | Почему именно он |
 |---|---|
-| Сначала commit текущего отчёта и README/CHANGELOG | Эти изменения уже готовы и фиксируют результаты проверки |
-| Затем правка `SKILL.md` и references по findings | Это прямое улучшение skill на основе real-project evidence |
-| Затем materialized generated-pack check | Это минимальный путь от L1/partial L2 к полноценному L2 |
+| Сначала commit текущего отчёта и README/CHANGELOG | Выполнено: commit `7284e14` |
+| Затем правка `SKILL.md` и references по findings | Выполнено в рабочей ветке; нужно закоммитить |
+| Затем materialized generated-pack check | Это следующий минимальный путь от L1/partial L2 к полноценному L2 |
 
 ## Проверенные источники
 

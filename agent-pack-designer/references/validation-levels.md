@@ -23,3 +23,9 @@
 - Use PASS_WITH_RISKS when evidence is incomplete but no blocker is known.
 - Use RETEST when a fix was made but the relevant check was not rerun.
 - Use HOLD or BLOCK when the pack can misroute work, inflate agent count, or misstate validation.
+
+## Naming Notes
+
+- `validation_reviewer.md` is the default starter-pack name.
+- `test_validation.md` is an acceptable project-specific alias when the agent maps tasks to L0-L5 and checks evidence sufficiency.
+- Do not count README validation wording as a validation reviewer unless a separate agent or router entry owns evidence review.

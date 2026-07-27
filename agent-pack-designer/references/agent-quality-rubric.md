@@ -26,6 +26,7 @@ Score each item as pass, risk, or fail:
 - Evidence: claims distinguish docs, inspected files, and executed commands.
 - Portability: Codex and Claude-specific instructions are separated where needed.
 - Minimality: removing the agent would create real duplication or risk.
+- Routing: every trigger-only agent is reachable from `context_router.md` or an equivalent routing matrix.
 
 ## Bad Signs
 
@@ -36,6 +37,17 @@ Score each item as pass, risk, or fail:
 - asks future agents to trust README claims as proof;
 - creates reviewers without a concrete risk;
 - uses platform-specific tooling without naming a fallback.
+- ships many agents without a router that keeps default context small.
+
+## Mature Pack Exception
+
+A mature project may justify many agents when:
+
+- each agent has a distinct recurring task or risk;
+- `context_router.md` selects one primary agent and zero or one reviewer by default;
+- optional/future agents are labeled and not loaded in normal work;
+- validation review remains separate from implementation and model selection;
+- project evidence shows the roles match real workflows.
 
 ## Verdicts
 

@@ -48,6 +48,18 @@ Add an agent only when all are true:
 
 Default to one primary workflow agent, one concrete reviewer if risk exists, `validation_reviewer.md`, and `task_spec_short.md`.
 
+Classify every selected file:
+
+| Category | Include when | Examples |
+|---|---|---|
+| Core | Needed for routing, primary work, task scoping, or evidence review | `AGENTS.md`, `context_router.md`, primary agent, `validation_reviewer.md`, `task_spec_short.md` |
+| Claude-specific | Claude Code is an explicit target runtime | `CLAUDE.md`, `.claude/agents/` |
+| Trigger-only domain | A mature project has a recurring workflow with distinct context | data quality, feature engineering, CV, model training, API/runtime, submission builder |
+| Trigger-only risk/review | A concrete recurring risk needs a separate review lens | leakage, metrics, reproducibility, red-team, docs/release |
+| Optional/future | The role is useful only for planned or rare work | observability, LTR/ranking, migration, future platform adapters |
+
+Many trigger-only agents are acceptable in a mature project if `context_router.md` explicitly prevents loading all agents by default and routes to one primary agent plus zero or one reviewer.
+
 ## 5. Define Contracts
 
 Every generated pack should state:

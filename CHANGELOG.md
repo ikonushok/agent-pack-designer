@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Added L1/partial-L2 validation evidence from comparing real project agent packs for hiking-route recommendation, loan-offer acceptance prediction, and credit-default prediction.
+- Added real-project guidance for core, trigger-only, and optional/future agents, including `test_validation.md` as a validation reviewer alias and `CLAUDE.md` as optional unless Claude Code is targeted.
 
 ## v0.1.0
 
