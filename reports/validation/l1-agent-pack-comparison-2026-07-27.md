@@ -24,6 +24,16 @@
 | Git status на момент отчёта | Изменения отчёта, `README.md` и `CHANGELOG.md` подготовлены после тега | Эти изменения относятся к следующему commit после `v0.1.0` |
 | P1 guidance после отчёта | `SKILL.md` и references обновлены по findings | Добавлены категории agents, alias `test_validation.md`, правило про опциональный `CLAUDE.md` |
 
+## Language policy для international release
+
+| Вопрос | Решение |
+|---|---|
+| Можно ли вести рабочие отчёты на русском сейчас? | Да, русские validation reports допустимы во время активной разработки |
+| Что должно быть на английском уже сейчас? | Public/installable слой: `SKILL.md`, `references/`, `assets/starter-pack/`, scripts, `README.md`, `CHANGELOG.md` |
+| Что нужно перед international release? | Language/publication pass |
+| Что входит в language/publication pass? | Перевести или перенести русские отчёты, оставить публичные docs на английском, записать результат как validation evidence |
+| Можно ли заявлять international/public readiness без этого pass? | Нет |
+
 ## Результаты проверки
 
 | Проверка | Команда / метод | Результат | Уровень |
@@ -58,6 +68,7 @@
 | P2 | Сгенерировать materialized pack в `/private/tmp` для одного из трёх проектов | Перейти от ручного сравнения к проверке результата генерации | Следующий шаг |
 | P2 | Добавить generated-pack consistency validator | Сделать L2 повторяемым, а не ручным | Следующий шаг |
 | P3 | Прогнать cross-project regression на всех трёх проектах после правок | Проверить, что новый guidance не ломает разные типы проектов | Подготовка к L4 |
+| P3 | Провести language/publication pass | Подготовить проект к международной аудитории | Public/installable слой и release evidence готовы на английском |
 | P3 | Подготовить `v0.2.0` после L2 validator | Выпустить версию не только со scaffold, но и с evidence-driven generation checks | Release с более сильным validation story |
 
 | Рекомендуемый ближайший шаг | Почему именно он |

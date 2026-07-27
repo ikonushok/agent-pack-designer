@@ -6,6 +6,7 @@
 - Added real-project guidance for core, trigger-only, and optional/future agents, including `test_validation.md` as a validation reviewer alias and `CLAUDE.md` as optional unless Claude Code is targeted.
 - Added `scripts/validate_pack.py` for repeatable generated-pack L2 candidate validation.
 - Added an L2 candidate report from a materialized generated pack for `credit-default-prediction`.
+- Documented language policy: public/installable files stay English, while Russian working validation reports require a language/publication pass before international release.
 
 ## v0.1.0
 

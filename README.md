@@ -78,6 +78,10 @@ Rename `primary_agent.md` and `risk_reviewer.md` to project-specific names when 
 - Tests, smoke checks, dry-runs, and command output are evidence.
 - Do not add agents for hypothetical future tasks.
 
+## Language Policy
+
+Public/installable skill files are kept in English. Russian validation reports are acceptable during active development, but an international public release requires a language/publication pass: translate or relocate Russian reports, keep public docs English, and record the result as validation evidence.
+
 ## Validation Levels
 
 | Level | Meaning |

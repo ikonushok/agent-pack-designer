@@ -17,6 +17,13 @@ This repository builds `agent-pack-designer`: a portable skill for designing min
 5. Generated outputs must state validation level: L0-L5.
 6. Do not claim runtime validation unless commands were actually run.
 
+## Language Policy
+
+- Public/installable skill files must be English: `SKILL.md`, `references/`, `assets/starter-pack/`, scripts, `README.md`, `CHANGELOG.md`.
+- Russian working reports are allowed under `reports/validation/` before international release.
+- Before a public international release, run a language/publication pass: translate or relocate Russian reports, keep public docs English, and record the pass in validation evidence.
+- Do not claim international/public readiness until the language/publication pass is complete.
+
 ## Validation
 
 - L0: file structure and Markdown/YAML checks.
