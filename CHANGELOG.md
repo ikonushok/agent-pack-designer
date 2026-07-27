@@ -7,6 +7,7 @@
 - Strengthened `scripts/validate_pack.py` for repeatable generated-pack L2 consistency validation across required sections, router references, agent roles, validation reviewer terms, unresolved template tokens, and validation-level claims.
 - Added an L2 candidate report from a materialized generated pack for `credit-default-prediction`.
 - Added cross-project generated-pack L2 validation evidence for `credit-default-prediction`, `loan-offer-acceptance-prediction`, and `hiking-route-recommender-demo`.
+- Added L3 real-project simulation evidence for `hiking-route-recommender-demo` using a generated pack in `/private/tmp`.
 - Documented language policy: public/installable files stay English, while Russian working validation reports require a language/publication pass before international release.
 
 ## v0.1.0
