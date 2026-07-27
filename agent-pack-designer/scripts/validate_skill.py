@@ -22,6 +22,7 @@ REQUIRED_SKILL_FILES = [
     "assets/starter-pack/agents/risk_reviewer.md",
     "assets/starter-pack/agents/task_spec_short.md",
     "assets/starter-pack/agents/validation_reviewer.md",
+    "scripts/validate_pack.py",
 ]
 
 REQUIRED_STARTER_TERMS = {

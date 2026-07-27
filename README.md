@@ -20,7 +20,7 @@ Version: 0.1.0
 
 Tagged release `v0.1.0`: L0 - static scaffold validation via `agent-pack-designer/scripts/validate_skill.py`.
 
-Current branch evidence: L1 with partial L2 evidence from real-project agent-pack comparisons in `reports/validation/l1-agent-pack-comparison-2026-07-27.md`.
+Current branch evidence: L1 plus L2 candidate evidence from real-project comparisons and a materialized generated-pack check in `reports/validation/`.
 
 ## Install for Codex
 
@@ -41,6 +41,7 @@ The installable skill folder contains:
       references/
       assets/starter-pack/
       scripts/validate_skill.py
+      scripts/validate_pack.py
 
 ## Use with Claude Code
 
@@ -114,6 +115,10 @@ Run:
 Expected result for this release:
 
     RESULT: PASS L0
+
+Validate a generated project pack:
+
+    python3 agent-pack-designer/scripts/validate_pack.py /path/to/generated-pack
 
 Higher validation levels require generated-pack trials:
 
