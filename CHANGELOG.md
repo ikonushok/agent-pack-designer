@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Added L1/partial-L2 validation evidence from comparing real project agent packs for hiking-route recommendation, loan-offer acceptance prediction, and credit-default prediction.
+
 ## v0.1.0
 
 Initial installable release candidate.

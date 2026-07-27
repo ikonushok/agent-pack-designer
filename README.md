@@ -18,7 +18,9 @@ It helps create:
 
 Version: 0.1.0
 
-Current validation level: L0 - static scaffold validation via `agent-pack-designer/scripts/validate_skill.py`.
+Tagged release `v0.1.0`: L0 - static scaffold validation via `agent-pack-designer/scripts/validate_skill.py`.
+
+Current branch evidence: L1 with partial L2 evidence from real-project agent-pack comparisons in `reports/validation/l1-agent-pack-comparison-2026-07-27.md`.
 
 ## Install for Codex
 
@@ -98,6 +100,7 @@ Rename `primary_agent.md` and `risk_reviewer.md` to project-specific names when 
     AGENTS.md
     CLAUDE.md
     CHANGELOG.md
+    reports/validation/
     README.md
     VERSION
     LICENSE
