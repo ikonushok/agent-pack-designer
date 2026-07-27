@@ -1,0 +1,7 @@
+interface:
+  display_name: "Agent Pack Designer"
+  short_description: "Design minimal validation-driven agent packs"
+  default_prompt: "Use $agent-pack-designer to design a minimal validation-driven Codex and Claude agent pack for this project."
+
+policy:
+  allow_implicit_invocation: true

@@ -1,9 +1,70 @@
 # Design Workflow
 
-1. Classify the task: inspect, plan, patch, design, docs sync, validation, red-team.
-2. Identify project source of truth: README, AGENTS.md, CLAUDE.md, specs, tests, CI, scripts.
-3. Design minimal context routing.
-4. Add only agents with distinct triggers and checklists.
-5. Add reviewers for risky contracts: validation, README/spec drift, security, data leakage, release.
-6. Define forbidden changes and acceptance criteria.
-7. Report achieved validation level.
+Use this workflow when generating or restructuring a project agent pack.
+
+## 1. Classify the Work
+
+Choose one primary task mode:
+
+- inspect: understand repository shape and current instructions;
+- plan: design files and responsibilities without editing;
+- patch: update an existing pack;
+- design: create a new pack from project evidence;
+- docs-sync: align README/specs with agent instructions;
+- validation: prove the pack is coherent;
+- red-team: find prompt, routing, privacy, or release risks.
+
+## 2. Identify Evidence
+
+Prefer source files over summaries:
+
+- project purpose: README, product brief, package metadata, docs;
+- architecture boundaries: source tree, module docs, ADRs, API specs;
+- commands: package scripts, Makefile, CI config, test docs;
+- existing agent rules: AGENTS.md, CLAUDE.md, .claude/agents;
+- release gates: CI, lint, tests, smoke checks, deployment docs.
+
+Do not treat README claims as runtime evidence.
+
+## 3. Route Minimal Context
+
+Define what each future agent should inspect first. A useful router names:
+
+- task triggers;
+- files or glob patterns to inspect;
+- files to avoid unless needed;
+- default primary agent;
+- optional reviewer trigger;
+- validation command or manual check.
+
+## 4. Select Agents
+
+Add an agent only when all are true:
+
+- it has a distinct recurring task;
+- it needs different context than the main agent;
+- it has a concrete checklist or output format;
+- it reduces risk or repeated context loading.
+
+Default to one primary workflow agent, one concrete reviewer if risk exists, `validation_reviewer.md`, and `task_spec_short.md`.
+
+## 5. Define Contracts
+
+Every generated pack should state:
+
+- allowed files and non-goals;
+- forbidden changes;
+- acceptance criteria;
+- validation level target;
+- what counts as sufficient evidence.
+
+## 6. Validate and Report
+
+Finish with:
+
+- achieved validation level L0-L5;
+- evidence inspected;
+- commands run and results;
+- missing evidence;
+- residual risk;
+- next smallest validation step.
