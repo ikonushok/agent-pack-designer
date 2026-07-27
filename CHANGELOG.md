@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+No unreleased changes.
+
+## v0.2.0
+
 - Added L1/partial-L2 validation evidence from comparing real project agent packs for hiking-route recommendation, loan-offer acceptance prediction, and credit-default prediction.
 - Added real-project guidance for core, trigger-only, and optional/future agents, including `test_validation.md` as a validation reviewer alias and `CLAUDE.md` as optional unless Claude Code is targeted.
 - Strengthened `scripts/validate_pack.py` for repeatable generated-pack L2 consistency validation across required sections, router references, agent roles, validation reviewer terms, unresolved template tokens, and validation-level claims.
@@ -12,6 +16,8 @@
 - Added L5 package release-readiness evidence, including language/publication pass, clean install verification, generated-pack smoke validation, and red-team claim audit.
 - Relocated Russian working validation reports under `reports/validation/internal_ru/` for publication hygiene while keeping public docs and the L5 report in English.
 - Documented language policy: public/installable files stay English, while Russian working validation reports require a language/publication pass before international release.
+
+Validation: L5 package release readiness via `reports/validation/l5-release-readiness-2026-07-27.md`.
 
 ## v0.1.0
 

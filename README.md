@@ -16,9 +16,9 @@ It helps create:
 
 ## Status
 
-Version: 0.1.0
+Version: 0.2.0
 
-Tagged release `v0.1.0`: L0 - static scaffold validation via `agent-pack-designer/scripts/validate_skill.py`.
+Current release `v0.2.0`: L5 package release readiness.
 
 Current branch evidence: L1, L2 generated-pack consistency evidence across three projects, L3 real-project simulation evidence for `hiking-route-recommender-demo`, L4-with-risks cross-project runtime regression evidence, and L5 package release-readiness evidence in `reports/validation/`.
 
@@ -138,13 +138,12 @@ Higher validation levels require generated-pack trials:
 
 ## Release Notes
 
-0.1.0 is tagged as the L0 installable release.
+0.2.0 is tagged as the L5 package release-readiness release.
 
-Current unreleased work adds L2 generated-pack consistency validation, one L3 real-project simulation, an L4-with-risks runtime regression protocol across three target projects, and an L5 package release-readiness protocol. This does not create a new Git tag or publish an artifact.
+The release includes L2 generated-pack consistency validation, one L3 real-project simulation, an L4-with-risks runtime regression protocol across three target projects, and an L5 package release-readiness protocol.
 
-Remaining post-0.1 work:
+Remaining post-0.2 work:
 
-- Cut and tag the next release when the current evidence should become an official release artifact.
 - Consider an installer only if manual copy becomes a recurring problem.
 
 ## License
