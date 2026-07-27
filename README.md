@@ -20,7 +20,7 @@ Version: 0.1.0
 
 Tagged release `v0.1.0`: L0 - static scaffold validation via `agent-pack-designer/scripts/validate_skill.py`.
 
-Current branch evidence: L1, L2 generated-pack consistency evidence across three projects, L3 real-project simulation evidence for `hiking-route-recommender-demo`, and L4-with-risks cross-project runtime regression evidence in `reports/validation/`.
+Current branch evidence: L1, L2 generated-pack consistency evidence across three projects, L3 real-project simulation evidence for `hiking-route-recommender-demo`, L4-with-risks cross-project runtime regression evidence, and L5 package release-readiness evidence in `reports/validation/`.
 
 ## Install for Codex
 
@@ -80,7 +80,7 @@ Rename `primary_agent.md` and `risk_reviewer.md` to project-specific names when 
 
 ## Language Policy
 
-Public/installable skill files are kept in English. Russian validation reports are acceptable during active development, but an international public release requires a language/publication pass: translate or relocate Russian reports, keep public docs English, and record the result as validation evidence.
+Public/installable skill files are kept in English. Russian validation reports are acceptable during active development. For the current release-readiness pass, earlier Russian working reports were relocated under `reports/validation/internal_ru/`, while public docs and the current L5 report are English.
 
 ## Validation Levels
 
@@ -140,12 +140,11 @@ Higher validation levels require generated-pack trials:
 
 0.1.0 is tagged as the L0 installable release.
 
-Current unreleased work adds L2 generated-pack consistency validation, one L3 real-project simulation, and an L4-with-risks runtime regression protocol across three target projects. This does not claim L5 because there is no language/publication pass, install verification, or red-team release audit for the next public release.
+Current unreleased work adds L2 generated-pack consistency validation, one L3 real-project simulation, an L4-with-risks runtime regression protocol across three target projects, and an L5 package release-readiness protocol. This does not create a new Git tag or publish an artifact.
 
 Remaining post-0.1 work:
 
-- Complete a language/publication pass before any international public release.
-- Add install path verification and red-team release audit before claiming L5.
+- Cut and tag the next release when the current evidence should become an official release artifact.
 - Consider an installer only if manual copy becomes a recurring problem.
 
 ## License
