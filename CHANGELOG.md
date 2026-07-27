@@ -2,7 +2,15 @@
 
 ## Unreleased
 
-No unreleased changes.
+- Added explicit `generated-pack`, `mature-existing-pack`, and `skill-designer-repository` validation profiles.
+- Kept `validate_pack.py --audit-existing` as a compatibility alias for the mature-existing profile.
+- Added `--report-md` customer-facing Markdown report output for existing-pack audits, including what works, risks, recommended changes, and token-economy estimates.
+- Added gitignored `reports/customer/` as the default location for generated customer-facing audit reports.
+- Added internal MT5 research existing-pack audit evidence under `reports/validation/internal_ru/`.
+- Added regression coverage for Claude agent discovery, intentional starter placeholders, report idempotence, profile mismatch, and verdict vocabulary.
+- Added `NOT_APPLICABLE`, `INCONCLUSIVE`, and `TOOL_ERROR` terminal verdicts so target or tool failures are not reported as agent-quality failures.
+- Made designer-profile validation use the installed trusted validator instead of executing target-owned Python.
+- Recorded independent red-team review with blocking findings fixed before the final `PASS` verdict.
 
 ## v0.2.0
 

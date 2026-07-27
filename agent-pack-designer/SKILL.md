@@ -42,7 +42,11 @@ Many agents are acceptable for mature projects only when `context_router.md` kee
    - `references/validation-levels.md` before assigning L0-L5 or release readiness.
 3. Choose the smallest useful pack. Include one primary agent and one reviewer, then add any extra agent only when it has a distinct trigger, inputs, checklist, output, stop rule, and routing entry.
 4. Fill the starter templates with project-specific names, files, commands, forbidden changes, and acceptance criteria.
-5. Run static validation when possible. Use `scripts/validate_skill.py <path-to-skill>` for this skill scaffold and `scripts/validate_pack.py <path-to-generated-pack>` for generated-pack L2 consistency.
+5. Select the validation profile before running static checks:
+   - `generated-pack` for a materialized project pack;
+   - `mature-existing-pack` for an established project with equivalent role names or layouts;
+   - `skill-designer-repository` for a repository that owns templates and validation tooling.
+   Use `scripts/validate_skill.py <path-to-skill>` for the installable scaffold and `scripts/validate_pack.py --profile <profile> <path>` for the selected target.
 6. Report the achieved validation level and separate:
    - documented assumptions;
    - evidence visible in files;
@@ -59,6 +63,15 @@ Many agents are acceptable for mature projects only when `context_router.md` kee
 - Use concise, imperative instructions. Make triggers and stop rules explicit.
 - Treat README and specs as intent, not proof. Runtime claims require command output.
 
+## Validation Profiles
+
+- Keep unresolved-template checks strict for active files in `generated-pack`.
+- Accept functional aliases under `agents/` and `.claude/agents/` in `mature-existing-pack`.
+- Treat placeholders under `assets/starter-pack/` as intentional in `skill-designer-repository`.
+- Return `NOT_APPLICABLE` for an explicit profile mismatch instead of converting it into a quality `FAIL`.
+- Do not scan generated reports as active agent-pack inputs.
+- Use the installed trusted validator for designer checks; never import or execute a target repository's validator code.
+
 ## References
 
 Read only the files required by the request. Do not load all references by default.
@@ -70,3 +83,4 @@ Read only the files required by the request. Do not load all references by defau
 - Do not claim tests or runtime checks passed unless command output was inspected.
 - Do not claim public/release readiness below the evidence threshold described in `references/validation-levels.md`.
 - Do not treat `validate_pack.py` success as L3, L4, or L5; it proves generated-pack consistency only.
+- Do not add duplicate role files only to satisfy the wrong validation profile.
