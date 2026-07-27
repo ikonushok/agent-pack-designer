@@ -34,7 +34,7 @@ Define what each future agent should inspect first. A useful router names:
 - files or glob patterns to inspect;
 - files to avoid unless needed;
 - default primary agent;
-- optional reviewer trigger;
+- reviewer trigger;
 - validation command or manual check.
 
 ## 4. Select Agents
@@ -46,7 +46,7 @@ Add an agent only when all are true:
 - it has a concrete checklist or output format;
 - it reduces risk or repeated context loading.
 
-Default to one primary workflow agent, one concrete reviewer if risk exists, `validation_reviewer.md`, and `task_spec_short.md`.
+Default to one primary workflow agent, one concrete risk or domain reviewer, `validation_reviewer.md`, and `task_spec_short.md`.
 
 Classify every selected file:
 
@@ -55,10 +55,10 @@ Classify every selected file:
 | Core | Needed for routing, primary work, task scoping, or evidence review | `AGENTS.md`, `context_router.md`, primary agent, `validation_reviewer.md`, `task_spec_short.md` |
 | Claude-specific | Claude Code is an explicit target runtime | `CLAUDE.md`, `.claude/agents/` |
 | Trigger-only domain | A mature project has a recurring workflow with distinct context | data quality, feature engineering, CV, model training, API/runtime, submission builder |
-| Trigger-only risk/review | A concrete recurring risk needs a separate review lens | leakage, metrics, reproducibility, red-team, docs/release |
+| Trigger-only risk/review | A concrete recurring risk needs the required review lens or an additional separate review lens | leakage, metrics, reproducibility, red-team, docs/release |
 | Optional/future | The role is useful only for planned or rare work | observability, LTR/ranking, migration, future platform adapters |
 
-Many trigger-only agents are acceptable in a mature project if `context_router.md` explicitly prevents loading all agents by default and routes to one primary agent plus zero or one reviewer.
+Many trigger-only agents are acceptable in a mature project if `context_router.md` explicitly prevents loading all agents by default and routes to one primary agent plus one reviewer.
 
 ## 5. Define Contracts
 

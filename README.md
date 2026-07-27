@@ -12,7 +12,7 @@ It helps create:
 - project-specific domain agents
 - validation and risk reviewers
 - task_spec_short.md
-- optional agents only when justified
+- optional extra agents only when justified
 
 ## Status
 
@@ -67,7 +67,7 @@ A generated project pack should normally contain:
       validation_reviewer.md
       task_spec_short.md
 
-Rename `primary_agent.md` and `risk_reviewer.md` to project-specific names when the target project has clear domain language. Delete or omit `risk_reviewer.md` when there is no concrete recurring risk to review.
+Rename `primary_agent.md` and `risk_reviewer.md` to project-specific names when the target project has clear domain language. Keep one risk or domain reviewer in every generated pack; when no single specialized risk dominates, keep it as a lightweight general project risk reviewer rather than adding multiple speculative reviewers.
 
 ## Design Principles
 

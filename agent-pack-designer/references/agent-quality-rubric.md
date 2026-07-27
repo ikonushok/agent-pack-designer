@@ -35,7 +35,7 @@ Score each item as pass, risk, or fail:
 - loads the whole project by default;
 - has no stop condition;
 - asks future agents to trust README claims as proof;
-- creates reviewers without a concrete risk;
+- creates extra reviewers without a concrete risk or distinct review lens;
 - uses platform-specific tooling without naming a fallback.
 - ships many agents without a router that keeps default context small.
 
@@ -44,7 +44,7 @@ Score each item as pass, risk, or fail:
 A mature project may justify many agents when:
 
 - each agent has a distinct recurring task or risk;
-- `context_router.md` selects one primary agent and zero or one reviewer by default;
+- `context_router.md` selects one primary agent and one reviewer by default;
 - optional/future agents are labeled and not loaded in normal work;
 - validation review remains separate from implementation and model selection;
 - project evidence shows the roles match real workflows.

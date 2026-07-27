@@ -7,6 +7,7 @@ import argparse
 import re
 import sys
 from pathlib import Path
+from typing import Any
 
 
 REQUIRED_SKILL_FILES = [
@@ -22,6 +23,7 @@ REQUIRED_SKILL_FILES = [
     "assets/starter-pack/agents/risk_reviewer.md",
     "assets/starter-pack/agents/task_spec_short.md",
     "assets/starter-pack/agents/validation_reviewer.md",
+    "scripts/validate_skill.py",
     "scripts/validate_pack.py",
 ]
 
@@ -38,8 +40,102 @@ REQUIRED_STARTER_TERMS = {
 NAME_RE = re.compile(r"^[a-z0-9][a-z0-9-]{0,62}$")
 
 
+class ValidationFileError(Exception):
+    """Raised when a validation input cannot be read as expected text."""
+
+
 def read_text(path: Path) -> str:
-    return path.read_text(encoding="utf-8")
+    try:
+        return path.read_text(encoding="utf-8")
+    except UnicodeDecodeError as exc:
+        raise ValidationFileError(f"{path} is not valid UTF-8: {exc}") from exc
+    except OSError as exc:
+        raise ValidationFileError(f"{path} could not be read: {exc}") from exc
+
+
+def strip_yaml_scalar(value: str) -> str:
+    value = value.strip()
+    if len(value) >= 2 and value[0] == value[-1] and value[0] in {"'", '"'}:
+        return value[1:-1]
+    return value
+
+
+def parse_limited_openai_yaml(text: str) -> tuple[dict[str, dict[str, Any]], list[str]]:
+    data: dict[str, dict[str, Any]] = {}
+    errors: list[str] = []
+    current_section = ""
+
+    for line_no, raw_line in enumerate(text.splitlines(), start=1):
+        if not raw_line.strip() or raw_line.lstrip().startswith("#"):
+            continue
+        if raw_line.startswith("\t"):
+            errors.append(f"agents/openai.yaml line {line_no} uses tab indentation")
+            continue
+
+        indent = len(raw_line) - len(raw_line.lstrip(" "))
+        line = raw_line.strip()
+
+        if indent == 0:
+            key, separator, value = line.partition(":")
+            if not separator or value.strip():
+                errors.append(f"agents/openai.yaml line {line_no} must be a top-level mapping key")
+                current_section = ""
+                continue
+            current_section = key.strip()
+            data.setdefault(current_section, {})
+            continue
+
+        if indent != 2:
+            errors.append(f"agents/openai.yaml line {line_no} must use two-space indentation")
+            continue
+        if not current_section:
+            errors.append(f"agents/openai.yaml line {line_no} is nested before a section")
+            continue
+
+        key, separator, value = line.partition(":")
+        if not separator:
+            errors.append(f"agents/openai.yaml line {line_no} is not key: value")
+            continue
+        value = value.strip()
+        if value in {"[", "{"}:
+            errors.append(f"agents/openai.yaml line {line_no} has an unclosed flow value")
+            continue
+        if value.count("[") != value.count("]") or value.count("{") != value.count("}"):
+            errors.append(f"agents/openai.yaml line {line_no} has unbalanced brackets")
+            continue
+
+        if value.lower() == "true":
+            parsed_value: Any = True
+        elif value.lower() == "false":
+            parsed_value = False
+        else:
+            parsed_value = strip_yaml_scalar(value)
+        data[current_section][key.strip()] = parsed_value
+
+    return data, errors
+
+
+def load_openai_yaml(path: Path) -> tuple[dict[str, Any], list[str]]:
+    text = read_text(path)
+    try:
+        import yaml  # type: ignore[import-not-found]
+    except ImportError:
+        return parse_limited_openai_yaml(text)
+
+    try:
+        loaded = yaml.safe_load(text)
+    except yaml.YAMLError as exc:
+        return {}, [f"agents/openai.yaml is not valid YAML: {exc}"]
+    if not isinstance(loaded, dict):
+        return {}, ["agents/openai.yaml must be a mapping"]
+    return loaded, []
+
+
+def nested_value(data: dict[str, Any], section: str, key: str) -> Any:
+    section_data = data.get(section)
+    if not isinstance(section_data, dict):
+        return None
+    return section_data.get(key)
 
 
 def parse_frontmatter(skill_md: Path) -> tuple[dict[str, str], list[str]]:
@@ -78,17 +174,25 @@ def parse_frontmatter(skill_md: Path) -> tuple[dict[str, str], list[str]]:
 
 
 def validate_openai_yaml(path: Path) -> list[str]:
-    text = read_text(path)
     errors: list[str] = []
-    required_terms = [
-        'display_name: "Agent Pack Designer"',
-        "short_description:",
-        'default_prompt: "Use $agent-pack-designer',
-        "allow_implicit_invocation: true",
-    ]
-    for term in required_terms:
-        if term not in text:
-            errors.append(f"agents/openai.yaml missing {term}")
+    data, yaml_errors = load_openai_yaml(path)
+    errors.extend(yaml_errors)
+    if errors:
+        return errors
+
+    display_name = nested_value(data, "interface", "display_name")
+    short_description = nested_value(data, "interface", "short_description")
+    default_prompt = nested_value(data, "interface", "default_prompt")
+    allow_implicit_invocation = nested_value(data, "policy", "allow_implicit_invocation")
+
+    if display_name != "Agent Pack Designer":
+        errors.append('agents/openai.yaml missing interface.display_name: "Agent Pack Designer"')
+    if not isinstance(short_description, str) or not short_description.strip():
+        errors.append("agents/openai.yaml missing interface.short_description")
+    if not isinstance(default_prompt, str) or not default_prompt.startswith("Use $agent-pack-designer"):
+        errors.append('agents/openai.yaml missing interface.default_prompt starting with "Use $agent-pack-designer"')
+    if allow_implicit_invocation is not True:
+        errors.append("agents/openai.yaml missing policy.allow_implicit_invocation: true")
     return errors
 
 
@@ -152,7 +256,11 @@ def main() -> int:
     args = parser.parse_args()
 
     root = Path(args.skill_path).expanduser().resolve()
-    errors, warnings = validate_skill(root)
+    try:
+        errors, warnings = validate_skill(root)
+    except ValidationFileError as exc:
+        errors = [str(exc)]
+        warnings = []
 
     for warning in warnings:
         print(f"WARN: {warning}")
