@@ -1,8 +1,10 @@
 # agent-pack-designer
 
-Design minimal, validation-driven AI agent packs for Codex and Claude Code from project descriptions, README files, technical specs, or existing repository evidence.
+Design minimal sufficient, validation-driven AI agent packs for Codex and Claude Code from project descriptions, README files, technical specs, or existing repository evidence.
 
-`agent-pack-designer` is a portable Codex skill for creating or auditing small project-specific agent packs. It focuses on routing, role separation, validation ownership, and evidence boundaries, while avoiding speculative agents that increase maintenance cost.
+`agent-pack-designer` is a portable Codex skill for creating or auditing project-specific agent packs that are intentionally scoped to the repository's real workflows, risks, and validation evidence. It designs the smallest role set that can handle the work responsibly: context routing, primary workflow ownership, risk or domain review, validation review, and optional trigger-only roles such as architecture, red-team, security, data quality, or release review when the project evidence justifies them.
+
+It focuses on context economy, role separation, reviewer ownership, validation levels, and evidence boundaries, while avoiding speculative agents that add maintenance cost without improving reliability.
 
 It helps produce:
 
