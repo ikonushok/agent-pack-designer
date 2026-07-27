@@ -8,6 +8,7 @@
 - Added an L2 candidate report from a materialized generated pack for `credit-default-prediction`.
 - Added cross-project generated-pack L2 validation evidence for `credit-default-prediction`, `loan-offer-acceptance-prediction`, and `hiking-route-recommender-demo`.
 - Added L3 real-project simulation evidence for `hiking-route-recommender-demo` using a generated pack in `/private/tmp`.
+- Added L4-with-risks runtime regression evidence across generated-pack-guided simulations for `go_through_the_forest`, `credit-default-prediction`, and `loan-offer-acceptance-prediction`, with target repositories left unchanged.
 - Documented language policy: public/installable files stay English, while Russian working validation reports require a language/publication pass before international release.
 
 ## v0.1.0

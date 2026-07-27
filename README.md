@@ -20,7 +20,7 @@ Version: 0.1.0
 
 Tagged release `v0.1.0`: L0 - static scaffold validation via `agent-pack-designer/scripts/validate_skill.py`.
 
-Current branch evidence: L1, L2 generated-pack consistency evidence across three projects, and L3 real-project simulation evidence for `hiking-route-recommender-demo` in `reports/validation/`.
+Current branch evidence: L1, L2 generated-pack consistency evidence across three projects, L3 real-project simulation evidence for `hiking-route-recommender-demo`, and L4-with-risks cross-project runtime regression evidence in `reports/validation/`.
 
 ## Install for Codex
 
@@ -140,11 +140,12 @@ Higher validation levels require generated-pack trials:
 
 0.1.0 is tagged as the L0 installable release.
 
-Current unreleased work adds L2 generated-pack consistency validation and one L3 real-project simulation. This does not claim L4 or L5 because there is no multi-project runtime regression protocol, language/publication pass, install verification, or red-team release audit for the next public release.
+Current unreleased work adds L2 generated-pack consistency validation, one L3 real-project simulation, and an L4-with-risks runtime regression protocol across three target projects. This does not claim L5 because there is no language/publication pass, install verification, or red-team release audit for the next public release.
 
 Remaining post-0.1 work:
 
-- Add a multi-project runtime regression protocol before claiming L4.
+- Complete a language/publication pass before any international public release.
+- Add install path verification and red-team release audit before claiming L5.
 - Consider an installer only if manual copy becomes a recurring problem.
 
 ## License
