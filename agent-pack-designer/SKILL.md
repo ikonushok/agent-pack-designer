@@ -42,7 +42,7 @@ Many agents are acceptable for mature projects only when `context_router.md` kee
    - `references/validation-levels.md` before assigning L0-L5 or release readiness.
 3. Choose the smallest useful pack. Add an agent only when it has a distinct trigger, inputs, checklist, output, stop rule, and routing entry.
 4. Fill the starter templates with project-specific names, files, commands, forbidden changes, and acceptance criteria.
-5. Run static validation when possible. Use `scripts/validate_skill.py <path-to-skill>` for this skill scaffold and `scripts/validate_pack.py <path-to-generated-pack>` for generated packs.
+5. Run static validation when possible. Use `scripts/validate_skill.py <path-to-skill>` for this skill scaffold and `scripts/validate_pack.py <path-to-generated-pack>` for generated-pack L2 consistency.
 6. Report the achieved validation level and separate:
    - documented assumptions;
    - evidence visible in files;
@@ -69,3 +69,4 @@ Read only the files required by the request. Do not load all references by defau
 - Do not merge implementation, review, validation, and red-team into one agent.
 - Do not claim tests or runtime checks passed unless command output was inspected.
 - Do not claim public/release readiness below the evidence threshold described in `references/validation-levels.md`.
+- Do not treat `validate_pack.py` success as L3, L4, or L5; it proves generated-pack consistency only.

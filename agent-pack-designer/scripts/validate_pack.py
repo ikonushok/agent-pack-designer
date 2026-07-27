@@ -25,11 +25,6 @@ REQUIRED_ROUTER_TERMS = [
     "validation",
 ]
 
-REQUIRED_TASK_SPEC_TERMS = [
-    "Goal",
-    "Validation",
-]
-
 REQUIRED_VALIDATION_TERMS = [
     "L0",
     "L1",
@@ -38,6 +33,100 @@ REQUIRED_VALIDATION_TERMS = [
     "L4",
     "L5",
 ]
+
+REQUIRED_SECTIONS = {
+    "AGENTS.md": [
+        "Project:",
+        "Working Rules",
+        "Forbidden Changes",
+        "Validation",
+        "Current validation level:",
+    ],
+    "CLAUDE.md": [
+        "Context Order",
+        "Validation",
+        "L0-L5",
+    ],
+    "agents/context_router.md": [
+        "Inputs",
+        "Task Modes",
+        "Routing",
+        "Primary context",
+        "Reviewer",
+        "Validation",
+        "Output",
+        "target validation level",
+    ],
+    "agents/task_spec_short.md": [
+        "Goal:",
+        "Non-goals:",
+        "Source of truth:",
+        "Allowed files:",
+        "Files to avoid:",
+        "Validation target:",
+        "Validation method:",
+        "Acceptance criteria:",
+        "Stop conditions:",
+        "Validation level achieved:",
+        "Commands run:",
+        "Residual risk:",
+    ],
+    "agents/validation_reviewer.md": [
+        "Evidence Levels",
+        "Checklist",
+        "Verdicts",
+        "PASS_WITH_RISKS",
+        "RETEST",
+        "HOLD",
+        "BLOCK",
+        "Report",
+        "achieved level",
+        "commands run",
+        "missing evidence",
+        "residual risk",
+    ],
+}
+
+REQUIRED_AGENT_SECTIONS = [
+    "Goal:",
+    "When to Use",
+    "Inspect First",
+    "Checklist",
+    "Stop Rules",
+    "Output",
+]
+
+REQUIRED_REVIEWER_SECTIONS = [
+    "Goal:",
+    "When to Use",
+    "Inspect First",
+    "Checklist",
+    "Verdicts",
+    "PASS_WITH_RISKS",
+    "BLOCK",
+    "Output",
+]
+
+TEMPLATE_TOKENS = [
+    "{{",
+    "}}",
+    "PROJECT_NAME",
+    "SOURCE_OF_TRUTH_FILES",
+    "PRIMARY_FILES",
+    "PRIMARY_WORKFLOW_TRIGGER",
+    "RISK_AREA",
+    "RISK_TRIGGER",
+    "RISK_FILES",
+    "DEFAULT_VALIDATION",
+    "RISK_VALIDATION",
+]
+
+AGENT_CORE_NAMES = {
+    "context_router.md",
+    "task_spec_short.md",
+    "validation_reviewer.md",
+    "test_validation.md",
+}
 
 
 def read_text(path: Path) -> str:
@@ -56,6 +145,75 @@ def markdown_files(root: Path) -> list[Path]:
     return sorted(path for path in root.rglob("*.md") if path.is_file())
 
 
+def contains(text: str, term: str) -> bool:
+    return term.lower() in text.lower()
+
+
+def require_terms(root: Path, relative: str, terms: list[str], errors: list[str]) -> None:
+    path = root / relative
+    if not path.is_file():
+        return
+    text = read_text(path)
+    for term in terms:
+        if not contains(text, term):
+            errors.append(f"{relative} missing required term: {term}")
+
+
+def agent_kind(path: Path) -> str:
+    name = path.name.lower()
+    text = read_text(path).lower()
+    if "reviewer" in name or "guard" in name or "validator" in name or "verdicts" in text:
+        return "reviewer"
+    return "primary"
+
+
+def validate_current_level(root: Path, errors: list[str]) -> None:
+    agents = root / "AGENTS.md"
+    if not agents.is_file():
+        return
+    for line in read_text(agents).splitlines():
+        if line.lower().startswith("current validation level:"):
+            if "L0" not in line:
+                errors.append("AGENTS.md must not claim generated-pack validation above L0 before project checks run")
+            return
+    errors.append("AGENTS.md missing current validation level statement")
+
+
+def validate_router_references(root: Path, agent_files: list[Path], errors: list[str]) -> None:
+    router = root / "agents/context_router.md"
+    if not router.is_file():
+        return
+    router_text = read_text(router)
+    for agent_file in agent_files:
+        relative = agent_file.relative_to(root).as_posix()
+        if relative not in router_text:
+            errors.append(f"agents/context_router.md does not route to agent file: {relative}")
+    if validation_path := has_any_file(root, VALIDATION_ALIASES):
+        relative = validation_path.relative_to(root).as_posix()
+        if relative not in router_text:
+            errors.append(f"agents/context_router.md does not route to validation reviewer: {relative}")
+
+
+def validate_agents(root: Path, agent_files: list[Path], errors: list[str]) -> None:
+    has_primary = False
+    has_reviewer = False
+
+    for path in agent_files:
+        relative = path.relative_to(root).as_posix()
+        kind = agent_kind(path)
+        if kind == "reviewer":
+            has_reviewer = True
+            require_terms(root, relative, REQUIRED_REVIEWER_SECTIONS, errors)
+        else:
+            has_primary = True
+            require_terms(root, relative, REQUIRED_AGENT_SECTIONS, errors)
+
+    if not has_primary:
+        errors.append("missing primary workflow agent under agents/")
+    if not has_reviewer:
+        errors.append("missing separate risk or domain reviewer under agents/")
+
+
 def validate_pack(root: Path, require_claude: bool) -> tuple[list[str], list[str]]:
     errors: list[str] = []
     warnings: list[str] = []
@@ -72,6 +230,11 @@ def validate_pack(root: Path, require_claude: bool) -> tuple[list[str], list[str
     if require_claude and not (root / "CLAUDE.md").is_file():
         errors.append("missing required file for Claude target: CLAUDE.md")
 
+    for relative, terms in REQUIRED_SECTIONS.items():
+        if relative == "CLAUDE.md" and not (root / relative).is_file():
+            continue
+        require_terms(root, relative, terms, errors)
+
     validation_path = has_any_file(root, VALIDATION_ALIASES)
     if validation_path is None:
         aliases = ", ".join(VALIDATION_ALIASES)
@@ -80,7 +243,7 @@ def validate_pack(root: Path, require_claude: bool) -> tuple[list[str], list[str
     agent_files = [
         path
         for path in (root / "agents").glob("*.md")
-        if path.name not in {"README.md", "context_router.md", "task_spec_short.md", "validation_reviewer.md", "test_validation.md"}
+        if path.name not in AGENT_CORE_NAMES
     ] if (root / "agents").is_dir() else []
     if not agent_files:
         errors.append("missing primary or domain agent under agents/")
@@ -94,12 +257,9 @@ def validate_pack(root: Path, require_claude: bool) -> tuple[list[str], list[str
         if len(agent_files) > 3 and "do not load all" not in router_text and "one primary" not in router_text:
             warnings.append("many agents exist, but router does not clearly keep default context small")
 
-    task_spec = root / "agents/task_spec_short.md"
-    if task_spec.exists():
-        task_text = read_text(task_spec)
-        for term in REQUIRED_TASK_SPEC_TERMS:
-            if term not in task_text:
-                errors.append(f"agents/task_spec_short.md missing term: {term}")
+    validate_router_references(root, agent_files, errors)
+    validate_agents(root, agent_files, errors)
+    validate_current_level(root, errors)
 
     if validation_path is not None:
         validation_text = read_text(validation_path)
@@ -109,8 +269,9 @@ def validate_pack(root: Path, require_claude: bool) -> tuple[list[str], list[str
 
     for path in markdown_files(root):
         text = read_text(path)
-        if "{{" in text or "}}" in text:
-            errors.append(f"unresolved template placeholder in {path.relative_to(root)}")
+        for token in TEMPLATE_TOKENS:
+            if token in text:
+                errors.append(f"unresolved template token {token!r} in {path.relative_to(root)}")
 
     return errors, warnings
 
@@ -132,7 +293,7 @@ def main() -> int:
     if errors:
         print("RESULT: FAIL")
         return 1
-    print("RESULT: PASS L2_CANDIDATE")
+    print("RESULT: PASS L2")
     return 0
 
 

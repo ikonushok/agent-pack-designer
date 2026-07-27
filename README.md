@@ -20,7 +20,7 @@ Version: 0.1.0
 
 Tagged release `v0.1.0`: L0 - static scaffold validation via `agent-pack-designer/scripts/validate_skill.py`.
 
-Current branch evidence: L1 plus L2 candidate evidence from real-project comparisons and a materialized generated-pack check in `reports/validation/`.
+Current branch evidence: L1 plus L2 generated-pack consistency evidence from materialized checks across three projects in `reports/validation/`.
 
 ## Install for Codex
 
@@ -116,13 +116,17 @@ Run:
 
     python3 agent-pack-designer/scripts/validate_skill.py agent-pack-designer
 
-Expected result for this release:
+Expected result for the skill scaffold:
 
     RESULT: PASS L0
 
 Validate a generated project pack:
 
     python3 agent-pack-designer/scripts/validate_pack.py /path/to/generated-pack
+
+Expected result for a structurally consistent generated pack:
+
+    RESULT: PASS L2
 
 Higher validation levels require generated-pack trials:
 
@@ -132,18 +136,15 @@ Higher validation levels require generated-pack trials:
 - L4: cross-project regression.
 - L5: public/release readiness review.
 
-## First Release
+## Release Notes
 
-0.1.0 is ready to tag after the L0 validator passes and the final diff is reviewed.
+0.1.0 is tagged as the L0 installable release.
 
-Suggested release command:
-
-    git tag v0.1.0
+Current unreleased work adds L2 generated-pack consistency validation. This does not claim L3, L4, or L5 because the generated packs were not installed into target repositories or used in full project simulations.
 
 Remaining post-0.1 work:
 
-- Forward-test on several project types.
-- Add sample generated packs from real project cases.
+- Forward-test the skill in a full real-project simulation.
 - Consider an installer only if manual copy becomes a recurring problem.
 
 ## License
