@@ -1,0 +1,73 @@
+name: Validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate skill scaffold
+        run: python3 agent-pack-designer/scripts/validate_skill.py agent-pack-designer
+
+      - name: Validate designer repository profile
+        run: python3 agent-pack-designer/scripts/validate_pack.py --profile skill-designer-repository .
+
+      - name: Run tests
+        run: python3 -m unittest discover -s tests
+
+      - name: Check whitespace
+        run: git diff --check
+
+      - name: Language publication scan
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import sys
+
+          roots = [
+              Path("AGENTS.md"),
+              Path("CLAUDE.md"),
+              Path("README.md"),
+              Path("CHANGELOG.md"),
+              Path(".claude/agents"),
+              Path(".github/workflows"),
+              Path("agents"),
+              Path("agent-pack-designer"),
+              Path("reports/validation"),
+          ]
+          excluded = Path("reports/validation/internal_ru")
+          hits = []
+
+          def scan(path: Path) -> None:
+              if excluded in path.parents or path == excluded:
+                  return
+              if path.is_dir():
+                  for child in path.iterdir():
+                      scan(child)
+                  return
+              if path.suffix not in {".md", ".py", ".yaml", ".yml", ".txt"}:
+                  return
+              text = path.read_text(encoding="utf-8")
+              for line_no, line in enumerate(text.splitlines(), start=1):
+                  if any("\u0400" <= char <= "\u04ff" for char in line):
+                      hits.append(f"{path}:{line_no}: Cyrillic text in public surface")
+
+          for root in roots:
+              if root.exists():
+                  scan(root)
+
+          if hits:
+              print("\n".join(hits))
+              sys.exit(1)
+          PY

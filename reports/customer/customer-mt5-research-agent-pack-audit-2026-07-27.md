@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-- Target project: `/Users/bobrsubr/PycharmProjects/_trading/mt5-research`
+- Target project: local project
 - Profile: `mature-existing-pack`
 - Audit result: `PASS_WITH_RISKS EXISTING_PACK_AUDIT`
 - Role agents found: 16
@@ -12,8 +12,8 @@
 
 ## What Works Well
 
-- Root AGENTS.md exists and centralizes project-level guidance.
-- Routing source exists: AGENTS.md, agents/README_agents_index.md, CLAUDE.md.
+- Root `AGENTS.md` exists and centralizes project-level guidance.
+- Routing source exists: `AGENTS.md`, `agents/README_agents_index.md`, `CLAUDE.md`.
 - Routing tells future agents not to load every role file at once, which protects context budget.
 - Project-level forbidden changes or protected contracts are documented.
 - Task spec agent exists, supporting scoped work before edits.
@@ -21,19 +21,19 @@
 
 ## Problems And Risks
 
-- agents/test_validation.md is a validation alias but lacks level terms: L0, L1, L2, L3, L4
-- agents/candidate_selector.md lacks audit section signals: when to use, inspect first
-- agents/cascade_builder.md lacks audit section signals: inspect first
-- agents/data_quality.md lacks audit section signals: when to use
-- agents/decision_log_handoff.md lacks audit section signals: inspect first
-- agents/execution_reviewer.md lacks audit section signals: when to use, inspect first
-- agents/grid_pending_order_reviewer.md lacks audit section signals: when to use, inspect first
-- agents/monthly_cashflow_reviewer.md lacks audit section signals: when to use, inspect first
-- agents/mql5_engineer.md lacks audit section signals: when to use
-- agents/production_monitor.md lacks audit section signals: when to use, inspect first
-- agents/risk_manager.md lacks audit section signals: when to use, inspect first
-- agents/state_recovery_reviewer.md lacks audit section signals: when to use, inspect first
-- agents/strategy_research.md lacks audit section signals: inspect first
+- `agents/test_validation.md` is a validation alias but lacks level terms: L0, L1, L2, L3, L4
+- `agents/candidate_selector.md` lacks audit section signals: when to use, inspect first
+- `agents/cascade_builder.md` lacks audit section signals: inspect first
+- `agents/data_quality.md` lacks audit section signals: when to use
+- `agents/decision_log_handoff.md` lacks audit section signals: inspect first
+- `agents/execution_reviewer.md` lacks audit section signals: when to use, inspect first
+- `agents/grid_pending_order_reviewer.md` lacks audit section signals: when to use, inspect first
+- `agents/monthly_cashflow_reviewer.md` lacks audit section signals: when to use, inspect first
+- `agents/mql5_engineer.md` lacks audit section signals: when to use
+- `agents/production_monitor.md` lacks audit section signals: when to use, inspect first
+- `agents/risk_manager.md` lacks audit section signals: when to use, inspect first
+- `agents/state_recovery_reviewer.md` lacks audit section signals: when to use, inspect first
+- `agents/strategy_research.md` lacks audit section signals: inspect first
 
 ## Recommended Changes
 
@@ -70,6 +70,6 @@
 
 ## Validation Evidence
 
-- Command: `python3 agent-pack-designer/scripts/validate_pack.py --profile mature-existing-pack /Users/bobrsubr/PycharmProjects/_trading/mt5-research`
+- Command: `python3 agent-pack-designer/scripts/validate_pack.py --profile mature-existing-pack /path/to/project`
 - Result: `PASS_WITH_RISKS EXISTING_PACK_AUDIT`
 - This report audits existing-pack quality and routing. It does not claim generated-pack L2 consistency.

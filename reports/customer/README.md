@@ -12,17 +12,17 @@ Most generated customer reports stay gitignored because they can name private re
 
 | Report | Profile | Result | Why it is useful |
 |---|---|---|---|
-| `customer-agent-pack-designer-agent-pack-audit-2026-07-27.md` | `skill-designer-repository` | `PASS_WITH_RISKS` | Shows how the validator audits this repository as a skill-designer project instead of treating it as a generated customer pack. |
-| `customer-credit-default-prediction-agent-pack-audit-2026-07-27.md` | `mature-existing-pack` | `PASS_WITH_RISKS` | Shows a mature tabular ML project with many role agents, explicit routing, a validation alias, and missing Claude context. |
-| `customer-loan-offer-acceptance-prediction-agent-pack-audit-2026-07-27.md` | `mature-existing-pack` | `PASS_WITH_RISKS` | Shows a second mature ML project with a similar agent layout, useful for checking repeatability across related but distinct projects. |
-| `customer-hiking-route-recommender-demo-agent-pack-audit-2026-07-27.md` | `mature-existing-pack` | `FAIL` | Shows a negative audit where a known project is blocked by missing separate validation-review ownership and weak default-context routing. |
-| `customer-mt5-research-agent-pack-audit-2026-07-27.md` | `mature-existing-pack` | `PASS_WITH_RISKS` | Shows a mature high-risk trading/research project where many trigger-only agents can be acceptable when routing keeps default context small. |
+| [`customer-agent-pack-designer-agent-pack-audit-2026-07-27.md`](customer-agent-pack-designer-agent-pack-audit-2026-07-27.md) | `skill-designer-repository` | `PASS` | Shows how the validator audits this repository as a skill-designer project instead of treating it as a generated customer pack. |
+| [`customer-credit-default-prediction-agent-pack-audit-2026-07-27.md`](customer-credit-default-prediction-agent-pack-audit-2026-07-27.md) | `mature-existing-pack` | `PASS_WITH_RISKS` | Shows a mature tabular ML project with many role agents, explicit routing, a validation alias, and missing Claude context. |
+| [`customer-loan-offer-acceptance-prediction-agent-pack-audit-2026-07-27.md`](customer-loan-offer-acceptance-prediction-agent-pack-audit-2026-07-27.md) | `mature-existing-pack` | `PASS_WITH_RISKS` | Shows a second mature ML project with a similar agent layout, useful for checking repeatability across related but distinct projects. |
+| [`customer-hiking-route-recommender-demo-agent-pack-audit-2026-07-27.md`](customer-hiking-route-recommender-demo-agent-pack-audit-2026-07-27.md) | `mature-existing-pack` | `FAIL` | Shows a negative audit where a known project is blocked by missing separate validation-review ownership and weak default-context routing. |
+| [`customer-mt5-research-agent-pack-audit-2026-07-27.md`](customer-mt5-research-agent-pack-audit-2026-07-27.md) | `mature-existing-pack` | `PASS_WITH_RISKS` | Shows a mature high-risk trading/research project where many trigger-only agents can be acceptable when routing keeps default context small. |
 
 ## What These Audits Check
 
 The mature-existing-pack report is intentionally not a generated-pack schema check. It reviews whether an existing project agent pack has:
 
-- a root project contract such as `AGENTS.md`;
+- a root project contract such as [`AGENTS.md`](../../AGENTS.md);
 - routing that prevents loading every role file by default;
 - separate implementation, review, and validation ownership;
 - a validation reviewer or accepted validation alias;

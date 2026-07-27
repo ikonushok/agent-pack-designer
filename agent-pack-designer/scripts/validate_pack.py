@@ -317,6 +317,20 @@ def audit_agent_files(root: Path) -> list[Path]:
     return unique_paths(paths)
 
 
+def audit_agent_candidate_paths(root: Path) -> list[Path]:
+    paths: list[Path] = []
+    excluded_names = {"context_router.md", "task_spec_short.md", "task-spec-short.md"}
+    for agents_dir in role_directories(root):
+        paths.extend(
+            path
+            for path in agents_dir.glob("*.md")
+            if (path.is_file() or path.is_symlink())
+            and not path.name.lower().startswith("readme")
+            and path.name.lower() not in excluded_names
+        )
+    return unique_paths(paths)
+
+
 def find_existing_validation_reviewer(root: Path) -> Path | None:
     exact = has_any_file(root, VALIDATION_ALIASES)
     if exact is not None:
@@ -379,10 +393,10 @@ def existing_routing_sources(root: Path) -> list[Path]:
 def active_existing_files(root: Path) -> list[Path]:
     paths = [root / "AGENTS.md", root / "CLAUDE.md"]
     paths.extend(existing_routing_sources(root))
-    paths.extend(audit_agent_files(root))
+    paths.extend(audit_agent_candidate_paths(root))
     for relative in VALIDATION_ALIASES + TASK_SPEC_ALIASES:
         paths.append(root / relative)
-    return unique_paths([path for path in paths if path.is_file() and not path.is_symlink()])
+    return unique_paths([path for path in paths if path.is_file() or path.is_symlink()])
 
 
 def designer_skill_roots(root: Path) -> list[Path]:
@@ -817,6 +831,8 @@ def validate_existing_pack(root: Path, require_claude: bool) -> tuple[list[str],
         warnings.append(f"decision vocabulary incomplete: {', '.join(missing_decisions)}")
 
     for path in active_existing_files(root):
+        if path.is_symlink():
+            continue
         text = read_text(path)
         for token in TEMPLATE_TOKENS:
             if token in text:

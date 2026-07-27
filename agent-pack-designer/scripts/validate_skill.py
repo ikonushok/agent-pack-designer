@@ -149,17 +149,38 @@ def parse_frontmatter(skill_md: Path) -> tuple[dict[str, str], list[str]]:
     except ValueError:
         return {}, ["SKILL.md frontmatter must be closed with ---"]
 
+    try:
+        import yaml  # type: ignore[import-not-found]
+    except ImportError:
+        loaded_data: dict[Any, Any] = {}
+        for line_no, line in enumerate(raw_yaml.splitlines(), start=2):
+            if not line.strip():
+                continue
+            if ":" not in line:
+                errors.append(f"SKILL.md frontmatter line {line_no} is not key: value")
+                continue
+            key, value = line.split(":", 1)
+            key = key.strip()
+            value = strip_yaml_scalar(value)
+            loaded_data[key] = value
+    else:
+        try:
+            loaded = yaml.safe_load(raw_yaml)
+        except yaml.YAMLError as exc:
+            return {}, [f"SKILL.md frontmatter is not valid YAML: {exc}"]
+        if not isinstance(loaded, dict):
+            return {}, ["SKILL.md frontmatter must be a mapping"]
+        loaded_data = loaded
+
     data: dict[str, str] = {}
-    for line_no, line in enumerate(raw_yaml.splitlines(), start=2):
-        if not line.strip():
+    for raw_key, raw_value in loaded_data.items():
+        if not isinstance(raw_key, str):
+            errors.append(f"SKILL.md frontmatter key must be a string: {raw_key!r}")
             continue
-        if ":" not in line:
-            errors.append(f"SKILL.md frontmatter line {line_no} is not key: value")
+        if not isinstance(raw_value, str):
+            errors.append(f"SKILL.md frontmatter value for {raw_key} must be a string")
             continue
-        key, value = line.split(":", 1)
-        key = key.strip()
-        value = value.strip().strip('"')
-        data[key] = value
+        data[raw_key] = raw_value
 
     allowed = {"name", "description"}
     extra = sorted(set(data) - allowed)

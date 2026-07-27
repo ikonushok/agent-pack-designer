@@ -16,6 +16,7 @@ This repository builds `agent-pack-designer`: a portable skill for designing min
 4. Keep `SKILL.md` concise; move details to `references/`.
 5. Generated outputs must state validation level: L0-L5.
 6. Do not claim runtime validation unless commands were actually run.
+7. Use `PASS`, `PASS_WITH_RISKS`, `RETEST`, `HOLD`, and `BLOCK` as the repository review verdict vocabulary.
 
 ## Language Policy
 
@@ -32,3 +33,11 @@ This repository builds `agent-pack-designer`: a portable skill for designing min
 - L3: real project simulation.
 - L4: cross-project regression.
 - L5: public/release readiness.
+
+Decision vocabulary:
+
+- PASS: checks passed with sufficient evidence.
+- PASS_WITH_RISKS: checks passed, but residual risk or missing evidence remains.
+- RETEST: a change was made and the relevant check must be rerun.
+- HOLD: design or evidence needs revision before release.
+- BLOCK: unsafe, misleading, or unsupported claims must be fixed before proceeding.
