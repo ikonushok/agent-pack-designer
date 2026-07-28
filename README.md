@@ -8,8 +8,8 @@ It focuses on context economy, role separation, reviewer ownership, validation l
 
 It helps produce:
 
-- [`AGENTS.md`](AGENTS.md) for Codex project rules.
-- [`CLAUDE.md`](CLAUDE.md) for Claude Code project memory.
+- [`AGENTS.md`](agent-pack-designer/assets/starter-pack/AGENTS.md) for Codex project rules.
+- [`CLAUDE.md`](agent-pack-designer/assets/starter-pack/CLAUDE.md) for Claude Code project memory when Claude Code is in scope.
 - [`agents/context_router.md`](agent-pack-designer/assets/starter-pack/agents/context_router.md) for choosing the minimum useful context.
 - one primary project-specific workflow agent.
 - one risk or domain reviewer only when a concrete recurring risk or review workflow justifies it.
@@ -92,10 +92,10 @@ Scope boundaries:
 | Surface | Support model | What this repository provides |
 |---|---|---|
 | Codex | Installable skill | [`agent-pack-designer/SKILL.md`](agent-pack-designer/SKILL.md), [`agents/openai.yaml`](agent-pack-designer/agents/openai.yaml), [`references/`](agent-pack-designer/references/), [`assets/starter-pack/`](agent-pack-designer/assets/starter-pack/), and [`scripts/`](agent-pack-designer/scripts/) |
-| Claude Code | Project memory and reviewer agents | [`CLAUDE.md`](CLAUDE.md) plus [`.claude/agents/`](.claude/agents/) guidance for architecture, compatibility, and validation review |
-| Generated project packs | Cross-tool project guidance | [`AGENTS.md`](AGENTS.md) for Codex, optional [`CLAUDE.md`](CLAUDE.md) for Claude Code, shared [`agents/`](agent-pack-designer/assets/starter-pack/agents/) routing and reviewer files when the target project needs both |
+| Claude Code | Generated project files | Starter templates under [`assets/starter-pack/`](agent-pack-designer/assets/starter-pack/) that can be copied into a target project when Claude Code is an explicit target |
+| Generated project packs | Cross-tool project guidance | Starter-pack [`AGENTS.md`](agent-pack-designer/assets/starter-pack/AGENTS.md) for Codex, optional starter-pack [`CLAUDE.md`](agent-pack-designer/assets/starter-pack/CLAUDE.md) for Claude Code, and shared [`agents/`](agent-pack-designer/assets/starter-pack/agents/) routing and reviewer files when the target project needs them |
 
-Codex has the direct install path. Claude Code support is file-based: use this repository's [`CLAUDE.md`](CLAUDE.md) and [`.claude/agents/`](.claude/agents/), or generate equivalent project files for a target repository.
+Codex has the direct install path. Claude Code support is file-based: use or generate the starter-pack files for a target repository. Local workspace files such as root `AGENTS.md`, root `CLAUDE.md`, `.claude/`, `.codex/`, `.agents/`, and root `agents/` are intentionally ignored and are not part of the public package.
 
 ## Install For Codex
 
@@ -106,7 +106,7 @@ From the repository root:
 
 Restart Codex, then use:
 
-    Use $agent-pack-designer to design a minimal agent pack for this project from README.md and AGENTS.md.
+    Use $agent-pack-designer to design a minimal agent pack for this project from its README.md and existing agent instructions if present.
 
 The installable skill folder contains:
 
@@ -122,8 +122,8 @@ The installable skill folder contains:
 
 Claude Code can use:
 
-1. [`CLAUDE.md`](CLAUDE.md) for project memory and working rules.
-2. [`.claude/agents/`](.claude/agents/) for reviewer agents that check architecture, compatibility, and validation.
+1. [`assets/starter-pack/CLAUDE.md`](agent-pack-designer/assets/starter-pack/CLAUDE.md) as the project-memory template.
+2. [`assets/starter-pack/agents/`](agent-pack-designer/assets/starter-pack/agents/) as the source for router, reviewer, and task-spec templates.
 
 Example prompt:
 
@@ -240,10 +240,6 @@ Public/installable skill files are kept in English. Russian validation reports a
   - [`assets/starter-pack/`](agent-pack-designer/assets/starter-pack/)
   - [`scripts/validate_skill.py`](agent-pack-designer/scripts/validate_skill.py)
   - [`scripts/validate_pack.py`](agent-pack-designer/scripts/validate_pack.py)
-- [`.claude/agents/`](.claude/agents/)
-- [`agents/task_spec_short.md`](agents/task_spec_short.md)
-- [`AGENTS.md`](AGENTS.md)
-- [`CLAUDE.md`](CLAUDE.md)
 - [`CHANGELOG.md`](CHANGELOG.md)
 - [`reports/validation/`](reports/validation/)
 - [`README.md`](README.md)

@@ -36,13 +36,9 @@ jobs:
           import sys
 
           roots = [
-              Path("AGENTS.md"),
-              Path("CLAUDE.md"),
               Path("README.md"),
               Path("CHANGELOG.md"),
-              Path(".claude/agents"),
               Path(".github/workflows"),
-              Path("agents"),
               Path("agent-pack-designer"),
               Path("reports/validation"),
           ]

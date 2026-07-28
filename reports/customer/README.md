@@ -22,7 +22,7 @@ Most generated customer reports stay gitignored because they can name private re
 
 The mature-existing-pack report is intentionally not a generated-pack schema check. It reviews whether an existing project agent pack has:
 
-- a root project contract such as [`AGENTS.md`](../../AGENTS.md);
+- a root project contract such as `AGENTS.md`;
 - routing that prevents loading every role file by default;
 - separate implementation, review, and validation ownership;
 - a validation reviewer or accepted validation alias;

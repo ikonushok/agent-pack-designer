@@ -245,6 +245,15 @@ class ProfileContractTests(unittest.TestCase):
         errors, _warnings = validator.validate_skill_designer_repository(REPO_ROOT, require_claude=True)
         self.assertEqual([], errors)
 
+    def test_designer_profile_does_not_require_local_workspace_agents(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            shutil.copytree(REPO_ROOT / "agent-pack-designer", root / "agent-pack-designer")
+
+            errors, _warnings = validator.validate_skill_designer_repository(root, require_claude=True)
+
+            self.assertEqual([], errors)
+
     def test_designer_profile_never_executes_target_validator(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             skill_root = Path(temporary) / "agent-pack-designer"

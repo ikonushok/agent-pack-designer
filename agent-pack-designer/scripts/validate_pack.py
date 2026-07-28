@@ -616,11 +616,7 @@ def build_skill_designer_report(root: Path, errors: list[str], warnings: list[st
     """Build a customer-facing Markdown report for an agent-pack designer repository."""
     skill_roots = designer_skill_roots(root)
     skill_root = skill_roots[0] if len(skill_roots) == 1 else None
-    validation_path = find_existing_validation_reviewer(root)
-    agent_rows = collect_agent_audit_rows(root)
 
-    has_agents_md = (root / "AGENTS.md").is_file()
-    has_claude = (root / "CLAUDE.md").is_file()
     has_skill_scaffold = skill_root is not None and all((skill_root / relative).is_file() for relative in DESIGNER_REQUIRED_SKILL_FILES)
     materialized_errors: list[str] = []
     materialized_warnings: list[str] = []
@@ -628,28 +624,12 @@ def build_skill_designer_report(root: Path, errors: list[str], warnings: list[st
         materialized_errors, materialized_warnings = validate_materialized_starter_pack(skill_root)
     materialized_label = profile_result_label(PROFILE_GENERATED, materialized_errors, materialized_warnings)
 
-    total_agent_tokens = sum(row.estimated_tokens for row in agent_rows)
-    default_context_tokens = 0
-    if has_agents_md:
-        default_context_tokens += estimate_tokens(read_text(root / "AGENTS.md"))
-    if has_claude:
-        default_context_tokens += estimate_tokens(read_text(root / "CLAUDE.md"))
-    if agent_rows:
-        default_context_tokens += min(row.estimated_tokens for row in agent_rows)
-
     good: list[str] = []
-    if has_agents_md:
-        good.append("Root AGENTS.md exists and centralizes repository-level rules.")
-    if has_claude:
-        good.append("CLAUDE.md exists, so Claude Code compatibility is explicitly documented.")
     if has_skill_scaffold:
         good.append("The installable skill scaffold and starter-pack assets are present.")
-    if validation_path:
-        good.append(f"Repository validation reviewer exists: {validation_path.relative_to(root).as_posix()}.")
-    if agent_rows:
-        good.append(f"{len(agent_rows)} repository role agents were found under agents/ or .claude/agents/.")
     if materialized_label == f"{VERDICT_PASS} L2":
         good.append("Materialized starter-pack smoke validation passes L2.")
+    good.append("Repository-local assistant workspace files are outside the package surface.")
 
     problems: list[str] = []
     if errors:
@@ -658,38 +638,8 @@ def build_skill_designer_report(root: Path, errors: list[str], warnings: list[st
         problems.extend(warnings)
 
     recommendations: list[str] = []
-    if any("task_spec_short" in warning for warning in warnings):
-        recommendations.append("Add a lightweight repository task-spec agent, or document why self-work uses another scoping mechanism.")
-    if any("inspect first" in row.missing_signals for row in agent_rows):
-        recommendations.append("Add short Inspect First sections to repository role agents that currently rely on implicit context.")
-    if any("stop rules" in row.missing_signals for row in agent_rows):
-        recommendations.append("Add Stop Rules to reviewer agents so they can reject unsupported validation or unsafe release claims.")
-    if any("decision vocabulary incomplete" in warning for warning in warnings):
-        recommendations.append("Standardize repository review verdicts around PASS, PASS_WITH_RISKS, RETEST, HOLD, and BLOCK.")
     if not recommendations:
         recommendations.append("Keep the designer profile in CI so future template or agent changes are checked against the correct repository type.")
-
-    token_findings: list[str] = []
-    token_findings.append("The self-audit profile counts repository agents separately from generated customer packs.")
-    token_findings.append(f"Approximate repository role-agent text: {total_agent_tokens} tokens across {len(agent_rows)} files.")
-    token_findings.append(f"Approximate minimal self-work context: {default_context_tokens} tokens before task-specific source files.")
-    heavy_rows = [row for row in agent_rows if row.token_economy == "heavy"]
-    if heavy_rows:
-        token_findings.append("Heavy repository role files: " + ", ".join(f"{row.relative} (~{row.estimated_tokens})" for row in heavy_rows) + ".")
-    else:
-        token_findings.append("No repository role file is estimated above the heavy threshold.")
-
-    agent_table = [
-        "| Agent | Kind | Est. tokens | Token economy | Missing audit signals |",
-        "|---|---|---:|---|---|",
-    ]
-    for row in agent_rows:
-        missing = ", ".join(row.missing_signals) if row.missing_signals else "none"
-        agent_table.append(
-            f"| `{row.relative}` | {row.kind} | {row.estimated_tokens} | {row.token_economy} | {missing} |"
-        )
-    if not agent_rows:
-        agent_table.append("| none | - | 0 | - | no repository role agents found |")
 
     result_label = profile_result_label(PROFILE_DESIGNER, errors, warnings)
     skill_package = skill_root.relative_to(root).as_posix() if skill_root is not None else "missing or ambiguous"
@@ -703,9 +653,7 @@ def build_skill_designer_report(root: Path, errors: list[str], warnings: list[st
         f"- Profile: `{PROFILE_DESIGNER}`",
         f"- Audit result: `{result_label}`",
         f"- Skill package: `{skill_package}`",
-        f"- Repository role agents found: {len(agent_rows)}",
-        f"- Validation reviewer: `{validation_path.relative_to(root).as_posix()}`" if validation_path else "- Validation reviewer: missing",
-        f"- Claude context: {'present' if has_claude else 'absent'}",
+        "- Repository-local assistant files: ignored",
         f"- Materialized starter-pack check: `{materialized_label}`",
         "",
         "## What Works Well",
@@ -720,13 +668,14 @@ def build_skill_designer_report(root: Path, errors: list[str], warnings: list[st
         "",
         markdown_list(recommendations),
         "",
-        "## Token Economy",
+        "## Package Surface",
         "",
-        markdown_list(token_findings),
-        "",
-        "## Repository Agent Review",
-        "",
-        "\n".join(agent_table),
+        markdown_list(
+            [
+                "The public surface is the installable `agent-pack-designer/` package plus selected docs, tests, reports, and CI.",
+                "Root `AGENTS.md`, root `CLAUDE.md`, `.claude/`, `.codex/`, `.agents/`, and root `agents/` are local workspace files when present.",
+            ]
+        ),
         "",
         "## Validation Evidence",
         "",
@@ -1005,16 +954,6 @@ def validate_skill_designer_repository(root: Path, require_claude: bool) -> tupl
         return [f"expected one skill package with SKILL.md and assets/starter-pack, found {len(skill_roots)}"], warnings
     skill_root = skill_roots[0]
 
-    agents_md = root / "AGENTS.md"
-    if not agents_md.is_file() or agents_md.is_symlink():
-        errors.append("missing required repository file: AGENTS.md")
-
-    claude_md = root / "CLAUDE.md"
-    if require_claude and (not claude_md.is_file() or claude_md.is_symlink()):
-        errors.append("missing required repository file for Claude target: CLAUDE.md")
-    elif not claude_md.is_file():
-        warnings.append("CLAUDE.md is absent; Claude Code compatibility was not audited")
-
     for relative in DESIGNER_REQUIRED_SKILL_FILES:
         path = skill_root / relative
         if not path.is_file() or path.is_symlink():
@@ -1031,20 +970,6 @@ def validate_skill_designer_repository(root: Path, require_claude: bool) -> tupl
     generated_errors, generated_warnings = validate_materialized_starter_pack(skill_root)
     errors.extend(f"materialized starter pack: {error}" for error in generated_errors)
     warnings.extend(f"materialized starter pack: {warning}" for warning in generated_warnings)
-
-    validation_path = find_existing_validation_reviewer(root)
-    if validation_path is None:
-        errors.append("missing repository validation reviewer under agents/ or .claude/agents/")
-
-    role_files = audit_agent_files(root)
-    if not any(is_existing_primary_agent(path) for path in role_files):
-        errors.append("missing repository primary workflow agent under agents/ or .claude/agents/")
-    if not any(is_existing_reviewer_agent(path) for path in role_files):
-        errors.append("missing repository reviewer under agents/ or .claude/agents/")
-
-    own_pack_errors, own_pack_warnings = validate_existing_pack(root, require_claude)
-    errors.extend(f"repository agent pack: {error}" for error in own_pack_errors)
-    warnings.extend(f"repository agent pack: {warning}" for warning in own_pack_warnings)
 
     return errors, warnings
 

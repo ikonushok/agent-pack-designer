@@ -2,6 +2,15 @@
 .DS_Store
 __pycache__/
 *.pyc
+
+# Local assistant workspace files. Keep these on the author's machine only.
+/AGENTS.md
+/CLAUDE.md
+/agents/
+/.agents/
+/.claude/
+/.codex/
+
 reports/customer/*
 !reports/customer/README.md
 !reports/customer/customer-agent-pack-designer-agent-pack-audit-2026-07-27.md
