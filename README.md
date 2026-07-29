@@ -118,6 +118,32 @@ The installable skill folder contains:
       scripts/validate_skill.py
       scripts/validate_pack.py
 
+## For Non-Technical Users
+
+You do not need to browse the `assets/starter-pack/` folder or copy files by hand. Open your project in ChatGPT/Codex or Claude Code and ask the assistant to evaluate this repository first:
+
+    Analyze this skill:
+    https://github.com/ikonushok/agent-pack-designer
+
+    Tell me whether adding an agent pack from it would be useful for this project.
+    Check the project's real structure, docs, risks, and available validation.
+    If README.md is missing, look for another project-context file.
+    Do not create files yet.
+
+If the assistant says the pack is useful, ask it to add the smallest project-specific pack:
+
+    Add the recommended minimal agent pack from:
+    https://github.com/ikonushok/agent-pack-designer
+
+    Use the starter pack as a template, but adapt every file to my project.
+    Put the generated files in the correct place for this project.
+    Create only the agents that are justified by real recurring workflows or risks.
+    If this project has no git, CI, tests, or runtime checks, do not claim L4 or L5.
+    Before changing files, explain what you plan to create.
+    After changing files, summarize what was added and what validation level is supported.
+
+This usually means the assistant creates or updates files such as `AGENTS.md`, optional `CLAUDE.md`, and an `agents/` folder directly inside your project. For Claude Code, this is a project file setup rather than a global skill installation.
+
 ## Use With Claude Code
 
 Claude Code can use:
