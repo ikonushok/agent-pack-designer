@@ -6,6 +6,27 @@ Design minimal sufficient, validation-driven AI agent packs for Codex and Claude
 
 It focuses on context economy, role separation, reviewer ownership, validation levels, and evidence boundaries, while avoiding speculative agents that add maintenance cost without improving reliability.
 
+## Contents
+
+New to agent packs or not comfortable with terminal setup? Start with [For Non-Technical Users](#for-non-technical-users).
+
+- [How This Differs](#how-this-differs)
+- [Operating Workflow](#operating-workflow)
+- [Status](#status)
+- [Codex And Claude Code Support](#codex-and-claude-code-support)
+- [Install For Codex](#install-for-codex)
+- [For Non-Technical Users](#for-non-technical-users)
+- [Use With Claude Code](#use-with-claude-code)
+- [Expected Output](#expected-output)
+- [Validation Levels](#validation-levels)
+- [Validate](#validate)
+- [Example Audit Reports](#example-audit-reports)
+- [Design Principles](#design-principles)
+- [Language Policy](#language-policy)
+- [Repository Layout](#repository-layout)
+- [Release Notes](#release-notes)
+- [License](#license)
+
 It helps produce:
 
 - [`AGENTS.md`](agent-pack-designer/assets/starter-pack/AGENTS.md) for Codex project rules.
