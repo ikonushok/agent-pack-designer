@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v0.3.0 - 2026-07-29
+
 - Added explicit `generated-pack`, `mature-existing-pack`, and `skill-designer-repository` validation profiles.
 - Kept `validate_pack.py --audit-existing` as a compatibility alias for the mature-existing profile.
 - Added `--report-md` customer-facing Markdown report output for existing-pack audits, including what works, risks, recommended changes, and token-economy estimates.
@@ -11,6 +13,10 @@
 - Added `NOT_APPLICABLE`, `INCONCLUSIVE`, and `TOOL_ERROR` terminal verdicts so target or tool failures are not reported as agent-quality failures.
 - Made designer-profile validation use the installed trusted validator instead of executing target-owned Python.
 - Recorded independent red-team review with blocking findings fixed before the final `PASS` verdict.
+- Added a release metadata validation script and CI check for `VERSION`, README release wording, and tag consistency.
+- Recorded v0.3.0 L5 release-readiness evidence for the current package surface.
+
+Validation: L5 package release readiness via `reports/validation/l5-release-readiness-2026-07-29.md`.
 
 ## v0.2.0
 

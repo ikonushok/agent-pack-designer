@@ -23,6 +23,13 @@ jobs:
       - name: Validate designer repository profile
         run: python3 agent-pack-designer/scripts/validate_pack.py --profile skill-designer-repository .
 
+      - name: Validate release metadata
+        run: python3 agent-pack-designer/scripts/validate_release_metadata.py .
+
+      - name: Validate tagged release metadata
+        if: github.ref_type == 'tag'
+        run: python3 agent-pack-designer/scripts/validate_release_metadata.py --require-head-tag .
+
       - name: Run tests
         run: python3 -m unittest discover -s tests
 
