@@ -245,6 +245,34 @@ class ProfileContractTests(unittest.TestCase):
         errors, _warnings = validator.validate_skill_designer_repository(REPO_ROOT, require_claude=True)
         self.assertEqual([], errors)
 
+    def test_starter_pack_keeps_optional_deliverables_visible(self) -> None:
+        primary = (STARTER_PACK / "agents/primary_agent.md").read_text(encoding="utf-8")
+        reviewer = (STARTER_PACK / "agents/risk_reviewer.md").read_text(encoding="utf-8")
+
+        self.assertIn("deliverable inventory", primary)
+        self.assertIn("optional/bonus/stretch", primary)
+        self.assertIn("implemented", primary)
+        self.assertIn("not claimed", primary)
+        self.assertIn("silently omitting optional", primary)
+        self.assertIn("deliverable coverage", reviewer)
+        self.assertIn("optional/bonus status", reviewer)
+
+    def test_skill_guidance_distinguishes_optional_agents_from_deliverables(self) -> None:
+        skill = (REPO_ROOT / "agent-pack-designer/SKILL.md").read_text(encoding="utf-8")
+        workflow = (REPO_ROOT / "agent-pack-designer/references/design-workflow.md").read_text(
+            encoding="utf-8"
+        )
+        levels = (REPO_ROOT / "agent-pack-designer/references/validation-levels.md").read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn("Optional/future agents are not the same", skill)
+        self.assertIn("Build a deliverable coverage inventory", skill)
+        self.assertIn("Inventory Deliverables", workflow)
+        self.assertIn("Do not convert optional deliverables into optional agents", workflow)
+        self.assertIn("semantic coverage", levels)
+        self.assertIn("checklist readiness from L2 alone", levels)
+
     def test_designer_profile_does_not_require_local_workspace_agents(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

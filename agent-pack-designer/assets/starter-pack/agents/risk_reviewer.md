@@ -15,6 +15,8 @@ Use only when a task affects {{RISK_TRIGGER}}.
 ## Checklist
 
 - Verify the change stays within the requested scope.
+- Verify deliverable coverage is explicit for required, submission, optional, bonus, stretch, artifact, and checklist items.
+- Treat missing optional/bonus status as missing evidence for full-scope, release, or review-readiness claims, even when implementation is not mandatory.
 - Check contract compatibility, security/privacy exposure, data loss, release risk, or user-visible behavior as applicable.
 - Compare claims against actual file changes and command output.
 - Identify the smallest missing validation step.

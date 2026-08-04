@@ -6,6 +6,8 @@ Design minimal sufficient, validation-driven AI agent packs for Codex and Claude
 
 It focuses on context economy, role separation, reviewer ownership, validation levels, and evidence boundaries, while avoiding speculative agents that add maintenance cost without improving reliability.
 
+The skill also separates optional agent roles from optional project deliverables. Bonus, extra-credit, stretch, and checklist-only sections should not force a new agent, but they must remain visible in the generated workflow or reviewer output with an explicit status such as `implemented`, `not implemented`, `not claimed`, or `blocked`.
+
 ## Contents
 
 New to agent packs or not comfortable with terminal setup? Start with [For Non-Technical Users](#for-non-technical-users).
@@ -208,6 +210,7 @@ Claim rules:
 - Treat README and specs as intent, not proof of implementation.
 - Treat tests, smoke checks, dry-runs, and command output as evidence.
 - Do not treat [`validate_pack.py`](agent-pack-designer/scripts/validate_pack.py) success as L3, L4, or L5; the generated-pack profile proves L2 structural consistency only.
+- Do not treat L2 as proof that every README/spec/checklist deliverable was semantically covered. Full deliverable coverage requires L3-style real-project evidence.
 
 ## Validate
 

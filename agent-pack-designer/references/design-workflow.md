@@ -26,7 +26,25 @@ Prefer source files over summaries:
 
 Do not treat README claims as runtime evidence.
 
-## 3. Route Minimal Context
+## 3. Inventory Deliverables
+
+Before choosing agents, list the project deliverables from source-of-truth files:
+
+- required tasks and acceptance criteria;
+- submission artifacts and generated outputs;
+- optional, bonus, extra-credit, stretch, or additional task sections;
+- checklist tables, screenshots, etalon outputs, sample values, or expected review anchors;
+- explicit non-goals or skipped sections.
+
+Every deliverable must be handled in one of three ways:
+
+- included in the primary workflow;
+- included in a reviewer checklist or validation route;
+- recorded as an explicit non-goal or status such as `implemented`, `not implemented`, `not claimed`, or `blocked`.
+
+Do not convert optional deliverables into optional agents. Optional/future agent roles may be omitted, but optional project deliverables still need visible status so reviewers do not miss silent scope loss.
+
+## 4. Route Minimal Context
 
 Define what each future agent should inspect first. A useful router names:
 
@@ -37,7 +55,7 @@ Define what each future agent should inspect first. A useful router names:
 - reviewer trigger;
 - validation command or manual check.
 
-## 4. Select Agents
+## 5. Select Agents
 
 Add an agent only when all are true:
 
@@ -60,7 +78,7 @@ Classify every selected file:
 
 Many trigger-only agents are acceptable in a mature project if `context_router.md` explicitly prevents loading all agents by default and routes to one primary agent plus zero or one triggered reviewer.
 
-## 5. Define Contracts
+## 6. Define Contracts
 
 Every generated pack should state:
 
@@ -69,8 +87,9 @@ Every generated pack should state:
 - acceptance criteria;
 - validation level target;
 - what counts as sufficient evidence.
+- deliverable coverage status for required, submission, optional, bonus, and checklist artifacts.
 
-## 6. Validate and Report
+## 7. Validate and Report
 
 Finish with:
 

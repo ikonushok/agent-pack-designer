@@ -11,8 +11,8 @@
 
 - L0 requires file existence, naming, Markdown/frontmatter checks, and no obvious contradictions.
 - L1 requires one realistic prompt or task using the pack and a recorded outcome.
-- L2 requires consistency across router, agent names, roles, stop rules, and templates.
-- L3 requires applying the pack to one real project case and inspecting the generated output.
+- L2 requires consistency across router, agent names, roles, stop rules, and templates. It does not prove semantic coverage of every README/spec/checklist deliverable.
+- L3 requires applying the pack to one real project case and inspecting the generated output, including whether required, submission, optional, bonus, and checklist deliverables are represented or explicitly marked out of scope.
 - L4 requires repeated checks across several materially different project types.
 - L5 requires release checks, red-team review, install path verification, and documented residual risk.
 
@@ -20,6 +20,7 @@
 
 - Never claim runtime validation unless commands were actually run and inspected.
 - Never claim public/release readiness below L3.
+- Never claim full task, peer-review, or checklist readiness from L2 alone; semantic deliverable coverage needs L3 evidence.
 - Use PASS_WITH_RISKS when evidence is incomplete but no blocker is known.
 - Use RETEST when a fix was made but the relevant check was not rerun.
 - Use HOLD or BLOCK when the pack can misroute work, inflate agent count, or misstate validation.

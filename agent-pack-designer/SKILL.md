@@ -41,14 +41,15 @@ Many agents are acceptable for mature projects only when `context_router.md` kee
    - `references/design-workflow.md` when generating or restructuring a pack.
    - `references/agent-quality-rubric.md` when reviewing agent quality.
    - `references/validation-levels.md` before assigning L0-L5 or release readiness.
-3. Choose the smallest useful pack. Include one primary agent and validation reviewer; add a risk or domain reviewer only when it has a distinct trigger, inputs, checklist, output, stop rule, and routing entry.
-4. Fill the starter templates with project-specific names, files, commands, forbidden changes, and acceptance criteria.
-5. Select the validation profile before running static checks:
+3. Build a deliverable coverage inventory from source-of-truth files. Include required, submission, optional, bonus, extra-credit, stretch, artifact, table, and checklist sections. Every deliverable must be represented in the primary workflow, reviewer checklist, or explicit non-goal/status.
+4. Choose the smallest useful pack. Include one primary agent and validation reviewer; add a risk or domain reviewer only when it has a distinct trigger, inputs, checklist, output, stop rule, and routing entry.
+5. Fill the starter templates with project-specific names, files, commands, forbidden changes, and acceptance criteria.
+6. Select the validation profile before running static checks:
    - `generated-pack` for a materialized project pack;
    - `mature-existing-pack` for an established project with equivalent role names or layouts;
    - `skill-designer-repository` for a repository that owns templates and validation tooling.
    Use `scripts/validate_skill.py <path-to-skill>` for the installable scaffold and `scripts/validate_pack.py --profile <profile> <path>` for the selected target.
-6. Report the achieved validation level and separate:
+7. Report the achieved validation level and separate:
    - documented assumptions;
    - evidence visible in files;
    - commands actually run;
@@ -57,6 +58,7 @@ Many agents are acceptable for mature projects only when `context_router.md` kee
 ## Generation Rules
 
 - Prefer one primary implementation agent plus a reviewer only when a concrete recurring risk or domain workflow justifies it. Do not add agents for hypothetical future tasks.
+- Optional/future agents are not the same as optional, bonus, extra-credit, stretch, or additional project deliverables. Do not silently omit optional deliverables from the project workflow; include explicit status such as `implemented`, `not implemented`, `not claimed`, or `blocked`.
 - For mature projects, allow multiple trigger-only domain agents when a router prevents loading them all by default.
 - Keep implementation, review, validation, and red-team responsibilities separate.
 - Keep agents project-specific. Avoid generic agents that could apply to every repository.

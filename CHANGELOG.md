@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Clarify that optional/future agents are different from optional, bonus, extra-credit, stretch, and checklist deliverables.
+- Add deliverable coverage inventory guidance so generated packs keep bonus and optional sections visible through explicit status rather than silently dropping them.
+- Update starter primary and reviewer templates to require explicit deliverable status.
+- Clarify that L2 validation proves structural consistency, not semantic coverage of every README/spec/checklist deliverable.
+
 ## v0.3.0 - 2026-07-29
 
 - Added explicit `generated-pack`, `mature-existing-pack`, and `skill-designer-repository` validation profiles.
