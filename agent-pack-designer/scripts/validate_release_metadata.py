@@ -27,6 +27,7 @@ def run_git(root: Path, args: list[str]) -> tuple[int, str]:
 def validate(root: Path, require_head_tag: bool) -> list[str]:
     errors: list[str] = []
     version_path = root / "VERSION"
+    skill_version_path = root / "agent-pack-designer" / "VERSION"
     readme_path = root / "README.md"
 
     try:
@@ -36,6 +37,17 @@ def validate(root: Path, require_head_tag: bool) -> list[str]:
 
     if not VERSION_RE.match(version):
         errors.append(f"VERSION must be semantic X.Y.Z, got: {version!r}")
+
+    try:
+        skill_version = skill_version_path.read_text(encoding="utf-8").strip()
+    except OSError as exc:
+        errors.append(f"could not read agent-pack-designer/VERSION: {exc}")
+    else:
+        if skill_version != version:
+            errors.append(
+                "agent-pack-designer/VERSION must match root VERSION: "
+                f"expected {version!r}, got {skill_version!r}"
+            )
 
     try:
         readme = readme_path.read_text(encoding="utf-8")

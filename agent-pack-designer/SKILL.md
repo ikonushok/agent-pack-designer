@@ -7,6 +7,10 @@ description: Design, generate, audit, or revise minimal validation-driven AI age
 
 Turn project context into a small, usable agent pack with explicit evidence.
 
+## Installed Version
+
+At the start of a task, read `VERSION` in this skill directory to identify the installed package version. Include that version in validation reports, audits, release-readiness assessments, and compatibility diagnosis when it helps trace the result. Do not add it to ordinary user-facing replies unless it is relevant.
+
 ## Default Output Shape
 
 Use the smallest pack that can route work and validate claims:

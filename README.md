@@ -135,6 +135,7 @@ The installable skill folder contains:
 
     agent-pack-designer/
       SKILL.md
+      VERSION
       agents/openai.yaml
       references/
       assets/starter-pack/
@@ -285,6 +286,7 @@ Public/installable skill files are kept in English. Russian validation reports a
 
 - [`agent-pack-designer/`](agent-pack-designer/)
   - [`SKILL.md`](agent-pack-designer/SKILL.md)
+  - [`VERSION`](agent-pack-designer/VERSION) — installed package version
   - [`agents/openai.yaml`](agent-pack-designer/agents/openai.yaml)
   - [`references/`](agent-pack-designer/references/)
   - [`assets/starter-pack/`](agent-pack-designer/assets/starter-pack/)

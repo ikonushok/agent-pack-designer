@@ -12,6 +12,7 @@ from typing import Any
 
 REQUIRED_SKILL_FILES = [
     "SKILL.md",
+    "VERSION",
     "agents/openai.yaml",
     "references/design-workflow.md",
     "references/agent-quality-rubric.md",
@@ -38,6 +39,7 @@ REQUIRED_STARTER_TERMS = {
 }
 
 NAME_RE = re.compile(r"^[a-z0-9][a-z0-9-]{0,62}$")
+VERSION_RE = re.compile(r"^\d+\.\d+\.\d+$")
 
 
 class ValidationFileError(Exception):
@@ -229,6 +231,12 @@ def validate_skill(root: Path) -> tuple[list[str], list[str]]:
     for relative in REQUIRED_SKILL_FILES:
         if not (root / relative).is_file():
             errors.append(f"missing required file: {relative}")
+
+    version_path = root / "VERSION"
+    if version_path.is_file():
+        version = read_text(version_path).strip()
+        if not VERSION_RE.match(version):
+            errors.append(f"VERSION must be semantic X.Y.Z, got: {version!r}")
 
     if (root / "README.md").exists():
         errors.append("skill folder must not contain README.md")
