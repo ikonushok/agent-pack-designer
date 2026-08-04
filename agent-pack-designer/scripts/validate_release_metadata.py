@@ -44,7 +44,7 @@ def validate(root: Path, require_head_tag: bool) -> list[str]:
 
     expected_version_line = f"Version: {version}"
     expected_release_line = f"Current release `v{version}`"
-    expected_release_note = f"{version} is tagged as the L5 package release-readiness release."
+    expected_release_note = f"{version} is tagged as"
 
     for expected in [expected_version_line, expected_release_line, expected_release_note]:
         if expected not in readme:

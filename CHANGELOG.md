@@ -2,10 +2,14 @@
 
 ## Unreleased
 
+## v0.3.1 - 2026-08-04
+
 - Clarify that optional/future agents are different from optional, bonus, extra-credit, stretch, and checklist deliverables.
 - Add deliverable coverage inventory guidance so generated packs keep bonus and optional sections visible through explicit status rather than silently dropping them.
 - Update starter primary and reviewer templates to require explicit deliverable status.
 - Clarify that L2 validation proves structural consistency, not semantic coverage of every README/spec/checklist deliverable.
+
+Validation: L2 generated-pack consistency plus repository validation via `python3 -m unittest tests/test_validate_pack_profiles.py tests/test_validator_edge_cases.py`, `python3 agent-pack-designer/scripts/validate_skill.py agent-pack-designer`, and `python3 agent-pack-designer/scripts/validate_pack.py --profile skill-designer-repository .`.
 
 ## v0.3.0 - 2026-07-29
 

@@ -92,9 +92,9 @@ For a customer-facing audit report:
 
 ## Status
 
-Version: 0.3.0
+Version: 0.3.1
 
-Current release `v0.3.0`: L5 package release readiness for the `agent-pack-designer` skill package.
+Current release `v0.3.1`: bonus deliverable coverage guidance for the `agent-pack-designer` skill package.
 
 Evidence currently recorded in [`reports/validation/`](reports/validation/):
 
@@ -298,9 +298,9 @@ Public/installable skill files are kept in English. Russian validation reports a
 
 ## Release Notes
 
-0.3.0 is tagged as the L5 package release-readiness release.
+0.3.1 is tagged as the bonus deliverable coverage release.
 
-The release includes profile-specific validation for generated packs, mature existing packs, and skill-designer repositories; L2 generated-pack consistency validation; one L3 real-project simulation; an L4-with-risks runtime regression protocol across three target projects; and an L5 package release-readiness protocol.
+The release clarifies that optional/future agents are different from optional, bonus, extra-credit, stretch, and checklist deliverables. Generated packs should keep those deliverables visible through explicit status instead of silently dropping them.
 
 Remaining post-0.3 work:
 
