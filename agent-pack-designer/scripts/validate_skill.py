@@ -15,6 +15,7 @@ REQUIRED_SKILL_FILES = [
     "VERSION",
     "agents/openai.yaml",
     "references/design-workflow.md",
+    "references/spec-discovery.md",
     "references/agent-quality-rubric.md",
     "references/validation-levels.md",
     "assets/starter-pack/AGENTS.md",

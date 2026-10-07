@@ -16,6 +16,8 @@ Choose one primary task mode:
 
 ## 2. Identify Evidence
 
+Use [Specification Discovery](spec-discovery.md) to find task-relevant requirements in Spec Kit files, ordinary specification directories, documentation, or README sections. Extract deliverables, acceptance criteria, non-goals, constraints, and validation expectations with source references. Supplement missing or partial structured specs with ordinary docs; scaffold placeholders are not requirements.
+
 Prefer source files over summaries:
 
 - project purpose: README, product brief, package metadata, docs;
@@ -24,7 +26,7 @@ Prefer source files over summaries:
 - existing agent rules: AGENTS.md, CLAUDE.md, .claude/agents;
 - release gates: CI, lint, tests, smoke checks, deployment docs.
 
-Do not treat README claims as runtime evidence.
+Treat README/spec claims as intent. Before assigning L3-L5, cross-check requirements against relevant implementation and tests, report conflicts, and collect the evidence required by [Validation Levels](validation-levels.md). Do not treat source or test files as proof that commands passed.
 
 ## 3. Inventory Deliverables
 

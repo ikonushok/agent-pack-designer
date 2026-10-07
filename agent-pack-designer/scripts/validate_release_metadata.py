@@ -56,11 +56,15 @@ def validate(root: Path, require_head_tag: bool) -> list[str]:
 
     expected_version_line = f"Version: {version}"
     expected_release_line = f"Current release `v{version}`"
-    expected_release_note = f"{version} is tagged as"
-
-    for expected in [expected_version_line, expected_release_line, expected_release_note]:
+    for expected in [expected_version_line, expected_release_line]:
         if expected not in readme:
             errors.append(f"README.md missing release metadata: {expected}")
+
+    release_note_pattern = rf"^{re.escape(version)} is (?:tagged|prepared) as\b"
+    if not re.search(release_note_pattern, readme, re.MULTILINE):
+        errors.append(
+            f"README.md missing release note for {version}: expected tagged or prepared status"
+        )
 
     code, tags_output = run_git(root, ["tag", "--points-at", "HEAD"])
     if code != 0:

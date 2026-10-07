@@ -42,10 +42,11 @@ Many agents are acceptable for mature projects only when `context_router.md` kee
 
 1. Identify the target project, intended users, source-of-truth files, common tasks, risky contracts, and available validation commands.
 2. Read only the references needed for the current job:
+   - `references/spec-discovery.md` to locate specifications and extract project requirements from Spec Kit, ordinary docs, or README sections.
    - `references/design-workflow.md` when generating or restructuring a pack.
    - `references/agent-quality-rubric.md` when reviewing agent quality.
    - `references/validation-levels.md` before assigning L0-L5 or release readiness.
-3. Build a deliverable coverage inventory from source-of-truth files. Include required, submission, optional, bonus, extra-credit, stretch, artifact, table, and checklist sections. Every deliverable must be represented in the primary workflow, reviewer checklist, or explicit non-goal/status.
+3. Build a deliverable coverage inventory from discovered specifications and other source-of-truth files, with source references, acceptance criteria, non-goals, constraints, and validation expectations. Include required, submission, optional, bonus, extra-credit, stretch, artifact, table, and checklist sections. Every deliverable must be represented in the primary workflow, reviewer checklist, or explicit non-goal/status.
 4. Choose the smallest useful pack. Include one primary agent and validation reviewer; add a risk or domain reviewer only when it has a distinct trigger, inputs, checklist, output, stop rule, and routing entry.
 5. Fill the starter templates with project-specific names, files, commands, forbidden changes, and acceptance criteria.
 6. Select the validation profile before running static checks:
@@ -69,6 +70,7 @@ Many agents are acceptable for mature projects only when `context_router.md` kee
 - Put rare or speculative roles outside the default pack or omit them.
 - Use concise, imperative instructions. Make triggers and stop rules explicit.
 - Treat README and specs as intent, not proof. Runtime claims require command output.
+- Before claiming L3-L5, cross-check discovered requirements against relevant code and tests and collect the evidence required for that level. Report documentation/implementation conflicts explicitly.
 
 ## Validation Profiles
 

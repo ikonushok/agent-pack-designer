@@ -7,12 +7,14 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SKILL_ROOT = REPO_ROOT / "agent-pack-designer"
 VALIDATE_SKILL_PATH = SKILL_ROOT / "scripts" / "validate_skill.py"
 VALIDATE_PACK_PATH = SKILL_ROOT / "scripts" / "validate_pack.py"
+VALIDATE_RELEASE_PATH = SKILL_ROOT / "scripts" / "validate_release_metadata.py"
 
 
 def load_module(name: str, path: Path):
@@ -27,6 +29,7 @@ def load_module(name: str, path: Path):
 
 validate_skill = load_module("validate_skill_edge_cases", VALIDATE_SKILL_PATH)
 validate_pack = load_module("validate_pack_edge_cases", VALIDATE_PACK_PATH)
+validate_release = load_module("validate_release_edge_cases", VALIDATE_RELEASE_PATH)
 
 
 def write(root: Path, relative: str, content: str) -> None:
@@ -88,6 +91,55 @@ Verdicts: PASS_WITH_RISKS, RETEST, HOLD, BLOCK.
 Output: verdict.
 """,
     )
+
+
+class ReleaseMetadataTests(unittest.TestCase):
+    def setUp(self) -> None:
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        self.root = Path(temporary.name)
+        write(self.root, "VERSION", "0.4.0\n")
+        write(self.root, "agent-pack-designer/VERSION", "0.4.0\n")
+        self.write_readme("prepared")
+        self.git_mock = patch.object(validate_release, "run_git", return_value=(0, ""))
+        self.git_mock.start()
+        self.addCleanup(self.git_mock.stop)
+
+    def write_readme(self, status: str, version: str = "0.4.0") -> None:
+        write(
+            self.root,
+            "README.md",
+            f"Version: {version}\n\nCurrent release `v{version}`\n\n"
+            f"{version} is {status} as the specification discovery release.\n",
+        )
+
+    def test_accepts_prepared_and_tagged_release_metadata(self) -> None:
+        for status in ("prepared", "tagged"):
+            with self.subTest(status=status):
+                self.write_readme(status)
+                self.assertEqual(validate_release.validate(self.root, False), [])
+
+    def test_rejects_unknown_release_status(self) -> None:
+        self.write_readme("planned")
+        errors = validate_release.validate(self.root, False)
+        self.assertTrue(any("missing release note" in error for error in errors))
+
+    def test_rejects_stale_readme_version(self) -> None:
+        self.write_readme("prepared", version="0.3.1")
+        errors = validate_release.validate(self.root, False)
+        self.assertTrue(any("missing release metadata" in error for error in errors))
+        self.assertTrue(any("missing release note" in error for error in errors))
+
+    def test_rejects_mismatched_installed_version(self) -> None:
+        write(self.root, "agent-pack-designer/VERSION", "0.3.1\n")
+        errors = validate_release.validate(self.root, False)
+        self.assertTrue(any("must match root VERSION" in error for error in errors))
+
+    def test_prepared_metadata_does_not_bypass_required_head_tag(self) -> None:
+        errors = validate_release.validate(self.root, True)
+        self.assertTrue(any("HEAD is not tagged" in error for error in errors))
+        with patch.object(validate_release, "run_git", return_value=(0, "v0.4.0")):
+            self.assertEqual(validate_release.validate(self.root, True), [])
 
 
 class ValidatorEdgeCaseTests(unittest.TestCase):

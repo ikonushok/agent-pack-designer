@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+## v0.4.0 - 2026-10-07
+
+- Add specification discovery for Spec Kit files, ordinary specification directories, documentation, and README sections.
+- Fall back to ordinary docs when structured specs are missing or placeholder-only, and supplement partially covered requirements.
+- Extract deliverables, acceptance criteria, non-goals, constraints, and validation expectations with source provenance and explicit missing fields.
+- Require code/test cross-checks and level-specific evidence before L3-L5 claims; report documentation/implementation conflicts without silently dropping requirements.
+- Keep detailed discovery guidance in a reference linked from the skill and design workflow.
+- Synchronize repository and installed package versions and allow release metadata checks for locally prepared, untagged versions.
+
+Validation: L0 static validation and existing repository regression checks, recorded in `reports/validation/spec-discovery-0.4.0-2026-10-07.md`. No behavioral validation of the new discovery guidance or L3-L5 readiness is claimed.
+
 ## v0.3.1 - 2026-08-04
 
 - Clarify that optional/future agents are different from optional, bonus, extra-credit, stretch, and checklist deliverables.

@@ -8,6 +8,8 @@ It focuses on context economy, role separation, reviewer ownership, validation l
 
 The skill also separates optional agent roles from optional project deliverables. Bonus, extra-credit, stretch, and checklist-only sections should not force a new agent, but they must remain visible in the generated workflow or reviewer output with an explicit status such as `implemented`, `not implemented`, `not claimed`, or `blocked`.
 
+Specification discovery covers Spec Kit (`.specify/memory/constitution.md`, `specs/*/spec.md`) and ordinary specs under `spec/`, `specs/`, `docs/spec*`, `docs/requirements*`, `docs/design*`, or README sections. Missing, partial, or placeholder-only structured specs lead to relevant documentation fallback. The skill extracts deliverables, acceptance criteria, non-goals, constraints, and validation expectations with source references; claims above L2 require implementation checks and the evidence for the claimed level. See [Specification Discovery](agent-pack-designer/references/spec-discovery.md).
+
 ## Contents
 
 New to agent packs or not comfortable with terminal setup? Start with [For Non-Technical Users](#for-non-technical-users).
@@ -92,11 +94,13 @@ For a customer-facing audit report:
 
 ## Status
 
-Version: 0.3.1
+Version: 0.4.0
 
-Current release `v0.3.1`: bonus deliverable coverage guidance for the `agent-pack-designer` skill package.
+Current release `v0.4.0` is prepared locally: specification discovery for Spec Kit and ordinary project documentation.
 
-Evidence currently recorded in [`reports/validation/`](reports/validation/):
+Validation for v0.4.0 is recorded in [the specification discovery report](reports/validation/spec-discovery-0.4.0-2026-10-07.md). The update has L0 static validation and repository regression checks; behavioral validation of specification discovery and L3-L5 checks for this version remain unperformed.
+
+Historical evidence for earlier versions is recorded in [`reports/validation/`](reports/validation/):
 
 - L1 sample prompt evidence.
 - L2 generated-pack consistency evidence across three projects.
@@ -106,7 +110,7 @@ Evidence currently recorded in [`reports/validation/`](reports/validation/):
 
 Scope boundaries:
 
-- L5 applies to this package's release surface, install path, public documentation, red-team review, and recorded residual risk.
+- Historical L5 evidence applies to the package version and release surface inspected in its report; it does not establish L5 for v0.4.0.
 - [`validate_pack.py`](agent-pack-designer/scripts/validate_pack.py) with `--profile generated-pack` proves L2 structural consistency for a generated pack. It does not prove target-project runtime behavior.
 - Runtime, production, deployment, model-quality, or project-specific claims require separate command output or recorded evidence.
 
@@ -300,9 +304,9 @@ Public/installable skill files are kept in English. Russian validation reports a
 
 ## Release Notes
 
-0.3.1 is tagged as the bonus deliverable coverage release.
+0.4.0 is prepared as the specification discovery release; no tag or public publication is claimed.
 
-The release clarifies that optional/future agents are different from optional, bonus, extra-credit, stretch, and checklist deliverables. Generated packs should keep those deliverables visible through explicit status instead of silently dropping them.
+The update adds source discovery, fallback for missing or incomplete Spec Kit inputs, requirement extraction with provenance, and code/test evidence boundaries for claims above L2. It retains explicit coverage status for optional, bonus, extra-credit, stretch, and checklist deliverables.
 
 Remaining post-0.3 work:
 
