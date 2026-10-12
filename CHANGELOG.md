@@ -2,6 +2,21 @@
 
 ## Unreleased
 
+## v0.5.0 - 2026-10-12
+
+- Inspect existing implementations and callers before adding code; justify each new file and retained compatibility path.
+- Keep durable cross-session decisions in one maintained source, link to it elsewhere, and distinguish current instructions from historical evidence.
+- Treat a completion report as a chat response by default. Save separate reports when requested or needed for reproducibility, and preserve required experiment/preflight evidence in one evidence set.
+- Distinguish live code, permanent inputs, generated outputs and frozen source snapshots. Before authorized archival, check consumers, running processes, provenance, old/new paths and byte preservation; do not archive by age alone.
+- Check integration through entrypoints, imports, callers, CLI, configuration and documentation before completion; immediately explain the next concrete action and its purpose, distinguishing recommendations from authorized work.
+- Centralize code/knowledge/artifact policy in starter `AGENTS.md`; update the seven existing Markdown templates without adding roles or automatically migrating existing project packs.
+- Add task-spec fields for existing implementation/new files, knowledge destination, integration/artifact lifecycle, next step/purpose, and knowledge/integration results. Require them and the policy section for `generated-pack`, while retaining the flexible `mature-existing-pack` profile for older layouts.
+- Add four behavioral acceptance scenarios to the quality rubric: ordinary verification without an unnecessary report, a durable decision in its canonical document, frozen experiment evidence, and cleanup with an active consumer.
+
+Validation: `python -m unittest discover -s tests` passed all 31 tests on Linux/Python 3.11, matching the CI platform, with no skips. This includes rejection of each missing new completion field, rejection of a missing code/knowledge/artifact policy section, existing mature-layout compatibility, materialized starter consistency and trusted-validator isolation. Skill Creator `quick_validate.py`, `validate_skill.py`, the `skill-designer-repository` profile, release metadata, publication-language/link checks and `git diff --check` also passed.
+
+The Windows/Python 3.12 suite had one failure and one error in existing tests (path separators and child-process output encoding), plus two symlink skips. No fixes to those platform assumptions were included; use the Linux result for the repository's CI platform. These checks establish L0 for the skill and L2 for materialized templates. Independent execution of the four behavioral scenarios and L3-L5 readiness for this version are not claimed.
+
 ## v0.4.0 - 2026-10-07
 
 - Add specification discovery for Spec Kit files, ordinary specification directories, documentation, and README sections.

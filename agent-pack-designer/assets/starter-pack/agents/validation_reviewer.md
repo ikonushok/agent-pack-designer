@@ -18,6 +18,9 @@ Goal: check whether evidence is sufficient for the claimed validation level.
 - Confirm implementation and reviewer duties are separated.
 - Confirm no runtime or public-readiness claim exceeds inspected evidence.
 - Confirm command results are named when validation is claimed.
+- Apply `AGENTS.md`, "Code, Knowledge and Artifacts": check new-file purpose/reuse, integration through callers/CLI/configs/docs, temporary/transition disposition, current links and canonical cross-session knowledge.
+- Confirm required experiment/preflight evidence remains available, snapshots are distinguished from live code, and cleanup preserves active consumers and frozen provenance. The review does not authorize unrelated edits or process stops.
+- Confirm the completion response gives the result, then a concrete next step and its purpose with scope; this review does not require a new report file.
 
 ## Verdicts
 
@@ -30,6 +33,7 @@ Goal: check whether evidence is sufficient for the claimed validation level.
 ## Report
 
 - verdict;
+- next concrete step and purpose immediately after the verdict, or state completion; distinguish authorized work from recommendations;
 - achieved level L0-L5;
 - evidence reviewed;
 - commands run;

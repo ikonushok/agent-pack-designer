@@ -12,6 +12,16 @@ This file is the project-specific contract for Codex.
 4. Use `agents/validation_reviewer.md` before claiming tests, release readiness, or production safety.
 5. Use `agents/task_spec_short.md` before non-trivial edits or multi-step work.
 6. Keep changes scoped to the user request and the files allowed by the task spec.
+7. Name the immediate action and its purpose at the start. In the final response, give the result followed immediately by the next step and why it is useful; distinguish recommendations from authorized work, or say no further step is needed.
+
+## Code, Knowledge and Artifacts
+
+- Find existing code, callers and the canonical document before adding files; justify each new file instead of duplicating a workflow.
+- Check integration through entrypoints, imports/callers, CLI, configs and docs before completion. Resolve task-local duplication/temporary workarounds; document retained transition paths with their consumer, reason and migration condition.
+- Map durable decisions to the project's maintained requirements, contracts, commands, architecture or evaluation documents. Keep one canonical source per fact and links elsewhere. Update current instructions; keep dated history distinct. Chat is sufficient for transient status, not the only store of knowledge another session needs.
+- A standalone report needs a requested deliverable or reproducibility purpose. Preserve required preflight and frozen experiment evidence in one evidence set; review passes reference it. A completion report is normally response content, not another file.
+- Follow the existing project layout for live code, permanent inputs, results and archives. Preserve source snapshots used as evidence. Avoid new permanent imports/input dependencies on disposable report directories; expose another frozen input version explicitly when needed.
+- Archive only in authorized scope after checking callers, configs, commands, links, frozen provenance and active consumers. Preserve needed inputs/human evidence, verify preservation, map old/new paths and update current references. Keep historical hashes intact. Preserve active consumers and record deferred migration conditions; age alone is not a removal criterion.
 
 ## Forbidden Changes
 

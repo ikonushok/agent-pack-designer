@@ -18,7 +18,8 @@ This file is the Claude Code project memory. Keep it concise and load extra docs
 - Respect the project source of truth: {{SOURCE_OF_TRUTH_FILES}}.
 - Keep generated instructions project-specific and minimal.
 - Treat README/spec claims as intent, not proof.
-- State the validation level L0-L5 in final reports.
+- State the validation level L0-L5 in the completion response; a report format does not require a new file.
+- Apply the shared Code, Knowledge and Artifacts policy from AGENTS.md; give the result, then the next step and its purpose without expanding authorization.
 
 ## Validation
 

@@ -91,6 +91,18 @@ Every generated pack should state:
 - what counts as sufficient evidence.
 - deliverable coverage status for required, submission, optional, bonus, and checklist artifacts.
 
+### Code, knowledge and artifact lifecycle
+
+Put the shared policy in generated `AGENTS.md`, with actual project paths and conventions. Extend the task spec and role checklists to apply it; do not create a new role for each item or ask permission merely because a file is new.
+
+- Before adding code, locate the existing implementation, callers and entrypoint. Record the purpose of each new file and why reuse would not meet the request. A file outside the product-block inventory may be infrastructure, a test or a required snapshot; absence from a table and age alone do not prove it is redundant.
+- Choose one canonical destination for each durable decision: requirements, data/API contracts, commands, architecture rationale or evaluation limits. Update the existing section and link from other documents. Transient status may stay in chat; decisions needed by another session must remain discoverable on disk.
+- Separate maintained instructions from dated experiment/task history. Preserve versions, origin and applicability of historical evidence; do not accumulate contradictory "current" appendices. Create a standalone report only for a requested deliverable or reproducibility/comparison. Required preflight evidence belongs to the experiment's existing evidence set, with references from review passes instead of duplicate reports.
+- Separate live source and permanent inputs from generated results using the project's layout. Source snapshots in an evidence set are valid reproducibility artifacts. Review imports, input paths and commands to ensure new permanent dependencies do not silently rely on disposable reports. Parameterize another frozen input version through the project's CLI/config when needed.
+- Before completion, check integration through callers/imports, entrypoints, CLI, configs and docs; resolve task-local duplication and temporary workarounds. Retained compatibility paths need a concrete consumer, reason and condition for migration. Stay within the authorized scope.
+- Before authorized archival, inspect reverse references, frozen provenance/hash contracts and active consumers/processes. Preserve needed inputs and human evidence, record old/new paths, verify preservation and update active links. Preserve historical hashes; version a changed producer/plan instead of relabeling its frozen history. If a consumer is active, leave its files in place and record the condition for later migration; do not stop it merely to tidy a directory.
+- Start the final response with the result, immediately followed by a concrete next step and why it helps. Identify whether that step is already authorized work or a recommendation; if complete with no useful continuation, say so. At a blocker, name the missing input and how to obtain it. Do not invent follow-up work or substitute "I can continue" for an actionable step.
+
 ## 7. Validate and Report
 
 Finish with:
@@ -101,3 +113,6 @@ Finish with:
 - missing evidence;
 - residual risk;
 - next smallest validation step.
+- canonical location of new knowledge and disposition of temporary/transition artifacts.
+
+Keep this evidence in the response and update existing knowledge sources when needed. A separate audit/completion file is not the default. Run [completion scenarios](agent-quality-rubric.md#completion-scenarios) when realistic application can add evidence; state unperformed behavioral checks rather than raising the level from template or keyword checks.

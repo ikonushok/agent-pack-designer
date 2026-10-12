@@ -94,11 +94,11 @@ For a customer-facing audit report:
 
 ## Status
 
-Version: 0.4.0
+Version: 0.5.0
 
-Current release `v0.4.0` is prepared locally: specification discovery for Spec Kit and ordinary project documentation.
+Current release `v0.5.0`: code reuse, durable knowledge, justified reports, integration and artifact lifecycle checks.
 
-Validation for v0.4.0 is recorded in [the specification discovery report](reports/validation/spec-discovery-0.4.0-2026-10-07.md). The update has L0 static validation and repository regression checks; behavioral validation of specification discovery and L3-L5 checks for this version remain unperformed.
+Changes and validation for v0.5.0 are recorded in [the changelog](CHANGELOG.md#v050---2026-10-12). The skill has L0 static checks, repository regression checks and L2 structural consistency for materialized templates. Independent execution of the four new behavioral scenarios and L3-L5 checks for this version remain unperformed. Existing project packs are not automatically migrated.
 
 Historical evidence for earlier versions is recorded in [`reports/validation/`](reports/validation/):
 
@@ -110,7 +110,7 @@ Historical evidence for earlier versions is recorded in [`reports/validation/`](
 
 Scope boundaries:
 
-- Historical L5 evidence applies to the package version and release surface inspected in its report; it does not establish L5 for v0.4.0.
+- Historical L5 evidence applies to the package version and release surface inspected in its report; it does not establish L5 for v0.5.0.
 - [`validate_pack.py`](agent-pack-designer/scripts/validate_pack.py) with `--profile generated-pack` proves L2 structural consistency for a generated pack. It does not prove target-project runtime behavior.
 - Runtime, production, deployment, model-quality, or project-specific claims require separate command output or recorded evidence.
 
@@ -281,6 +281,8 @@ Customer reports are generated artifacts. They are examples and handoff outputs,
 - Separate implementation, review, validation, and red-team responsibilities.
 - Prefer revising existing agents before adding new ones.
 - Do not add agents for hypothetical future tasks.
+- Reuse existing code and keep durable knowledge in its maintained source; justify new files and standalone reports.
+- Check integration and artifact consumers before completion or authorized archival; explain the next action and its purpose.
 
 ## Language Policy
 
@@ -304,9 +306,9 @@ Public/installable skill files are kept in English. Russian validation reports a
 
 ## Release Notes
 
-0.4.0 is prepared as the specification discovery release; no tag or public publication is claimed.
+0.5.0 is tagged as the code, knowledge and artifact lifecycle update. See [the changelog](CHANGELOG.md#v050---2026-10-12) for the concrete changes and validation limits.
 
-The update adds source discovery, fallback for missing or incomplete Spec Kit inputs, requirement extraction with provenance, and code/test evidence boundaries for claims above L2. It retains explicit coverage status for optional, bonus, extra-credit, stretch, and checklist deliverables.
+The update adds reuse and knowledge destinations to task specs, keeps completion reports in chat unless a saved artifact has a purpose, and checks integration and consumers before completion or archival. Generated packs must include the new contracts; mature packs retain flexible layouts. The four rubric scenarios describe behavioral acceptance criteria and have not yet been independently exercised for this version.
 
 Remaining post-0.3 work:
 

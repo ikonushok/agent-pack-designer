@@ -12,6 +12,8 @@ Inspect only what is needed:
 - {{SOURCE_OF_TRUTH_FILES}};
 - relevant tests, scripts, or CI config.
 
+Find existing code/callers and canonical knowledge before choosing new files. Apply `AGENTS.md`, "Code, Knowledge and Artifacts"; inspect history only for a specific dependency. Use one primary plus a triggered reviewer; role files do not themselves authorize subagent creation.
+
 ## Task Modes
 
 - inspect: understand current behavior or files;
@@ -41,3 +43,4 @@ Return:
 - optional reviewer;
 - forbidden changes;
 - target validation level.
+- immediate next action and purpose; in the final response put the result first, then the next step with its purpose and scope.

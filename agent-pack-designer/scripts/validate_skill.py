@@ -30,12 +30,12 @@ REQUIRED_SKILL_FILES = [
 ]
 
 REQUIRED_STARTER_TERMS = {
-    "assets/starter-pack/AGENTS.md": ["Validation", "Forbidden Changes", "L0"],
+    "assets/starter-pack/AGENTS.md": ["Validation", "Forbidden Changes", "L0", "Code, Knowledge and Artifacts"],
     "assets/starter-pack/CLAUDE.md": ["Context Order", "Validation", "L0-L5"],
     "assets/starter-pack/agents/context_router.md": ["Routing", "Primary context", "target validation level"],
     "assets/starter-pack/agents/primary_agent.md": ["When to Use", "Checklist", "Stop Rules"],
     "assets/starter-pack/agents/risk_reviewer.md": ["When to Use", "Verdicts", "PASS_WITH_RISKS"],
-    "assets/starter-pack/agents/task_spec_short.md": ["Goal", "Validation target", "Acceptance criteria"],
+    "assets/starter-pack/agents/task_spec_short.md": ["Goal", "Validation target", "Acceptance criteria", "Existing implementation / new files:", "Knowledge destination:", "Integration and artifact lifecycle:", "Next step and purpose:", "Knowledge and integration:"],
     "assets/starter-pack/agents/validation_reviewer.md": ["Evidence Levels", "Verdicts", "achieved level"],
 }
 

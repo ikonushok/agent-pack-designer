@@ -202,6 +202,42 @@ class ExistingPackProfileRegressionTests(unittest.TestCase):
 
 
 class ProfileContractTests(unittest.TestCase):
+    def test_generated_pack_rejects_missing_completion_contract_fields(self) -> None:
+        fields = (
+            "Existing implementation / new files:",
+            "Knowledge destination:",
+            "Integration and artifact lifecycle:",
+            "Next step and purpose:",
+            "Knowledge and integration:",
+        )
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            create_materialized_generated_pack(root)
+            errors, _warnings = validator.validate_pack(root, require_claude=True)
+            self.assertEqual([], errors)
+            task_spec = root / "agents/task_spec_short.md"
+            complete = task_spec.read_text(encoding="utf-8")
+            for field in fields:
+                with self.subTest(field=field):
+                    task_spec.write_text(complete.replace(field, "", 1), encoding="utf-8")
+                    errors, _warnings = validator.validate_pack(root, require_claude=True)
+                    self.assertTrue(any(field in error for error in errors), errors)
+
+    def test_generated_pack_rejects_missing_code_knowledge_artifact_policy(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            create_materialized_generated_pack(root)
+            agents_md = root / "AGENTS.md"
+            content = agents_md.read_text(encoding="utf-8")
+            agents_md.write_text(
+                content.replace("Code, Knowledge and Artifacts", "", 1),
+                encoding="utf-8",
+            )
+            errors, _warnings = validator.validate_pack(root, require_claude=True)
+            self.assertTrue(
+                any("Code, Knowledge and Artifacts" in error for error in errors), errors
+            )
+
     def test_generated_pack_scans_active_pack_files_but_not_reports(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

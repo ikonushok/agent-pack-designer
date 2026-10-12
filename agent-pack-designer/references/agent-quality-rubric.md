@@ -27,6 +27,9 @@ Score each item as pass, risk, or fail:
 - Portability: Codex and Claude-specific instructions are separated where needed.
 - Minimality: removing the agent would create real duplication or risk.
 - Routing: every trigger-only agent is reachable from `context_router.md` or an equivalent routing matrix.
+- Completion: the primary checks integration, temporary/transition artifacts and active links before declaring completion.
+- Knowledge: durable decisions have one canonical maintained destination; transient status does not force a report file, and required experiment evidence is preserved.
+- Continuation: the result is followed by a concrete next step and its purpose; recommendations do not silently expand authorization.
 
 ## Bad Signs
 
@@ -38,6 +41,19 @@ Score each item as pass, risk, or fail:
 - creates extra reviewers without a concrete risk or distinct review lens;
 - uses platform-specific tooling without naming a fallback.
 - ships many agents without a router that keeps default context small.
+- creates a new report for every review pass, treats historical documents as current instructions, or deletes a snapshot merely because it duplicates source bytes.
+- archives by age or block membership without checking frozen inputs, callers and active consumers.
+
+## Completion Scenarios
+
+Use a relevant real or isolated case to assess decisions and resulting artifacts. These are behavioral acceptance cases, not a request to add test/report files to every target repository. Name the evidence actually inspected; checking wording alone does not prove these outcomes.
+
+| Case | Required observation | Failure signal |
+|---|---|---|
+| Ordinary verification, no new durable finding | Existing checks run; concise result, next action/purpose or completion; no gratuitous report | A report file is created just to announce PASS |
+| New decision needed by another session | Existing canonical section updated; references remain current; decision can be found without chat history | Decision exists only in chat or contradictory copies |
+| Reproducible experiment or required preflight | Frozen versions/inputs/commands/results/limits retained in one evidence set; reviewers reference it | Evidence discarded to reduce files, overwritten, or duplicated for each review |
+| Authorized cleanup with an active consumer | Dependencies/processes checked; required inputs kept available; map/integrity recorded for completed moves, deferred items have a condition | Live input/code moved, process stopped merely for tidiness, or archive declared proof of integration |
 
 ## Mature Pack Exception
 

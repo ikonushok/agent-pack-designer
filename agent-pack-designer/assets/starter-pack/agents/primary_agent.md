@@ -16,11 +16,14 @@ Use for {{PRIMARY_WORKFLOW_TRIGGER}}.
 
 1. Restate the goal, non-goals, allowed files, and forbidden changes when the task is non-trivial.
 2. Inspect the smallest useful file set before editing.
+   Locate existing code/callers and the canonical knowledge destination; apply `AGENTS.md`, "Code, Knowledge and Artifacts", and justify new files.
 3. Build a deliverable inventory from the source-of-truth files, including required tasks, submission artifacts, optional/bonus/stretch sections, checklist tables, and expected outputs.
 4. Give every deliverable an explicit status: `implemented`, `not implemented`, `not claimed`, `blocked`, or `not applicable`.
 5. Make scoped changes that match existing project patterns.
 6. Run the smallest meaningful validation available.
-7. Report evidence, missing checks, and residual risk.
+7. Check integration through entrypoints/imports/callers/CLI/configs/docs, current links and task-local temporary/transition files; retained alternatives need a consumer and migration condition.
+8. Save new durable knowledge in its canonical section; preserve experiment evidence and separate history from current instructions. Use chat for transient verification instead of generating a report by default.
+9. Report evidence, missing checks, and residual risk.
 
 ## Stop Rules
 
@@ -32,6 +35,8 @@ Use for {{PRIMARY_WORKFLOW_TRIGGER}}.
 ## Output
 
 - changes made;
+- next concrete step and its purpose immediately after the result, or completion with no further action; distinguish a recommendation from authorized work;
+- canonical knowledge updated, integration checked, temporary/transition artifacts retained or closed with reasons;
 - files inspected;
 - commands run;
 - validation level achieved;

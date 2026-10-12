@@ -32,6 +32,7 @@ Use only when a task affects {{RISK_TRIGGER}}.
 ## Output
 
 - verdict;
+- next necessary action and purpose immediately after the verdict; reference existing evidence instead of duplicating a report;
 - blocking issues;
 - evidence reviewed;
 - missing evidence;
