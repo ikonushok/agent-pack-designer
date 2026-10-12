@@ -17,6 +17,7 @@ Use for {{PRIMARY_WORKFLOW_TRIGGER}}.
 1. Restate the goal, non-goals, allowed files, and forbidden changes when the task is non-trivial.
 2. Inspect the smallest useful file set before editing.
    Locate existing code/callers and the canonical knowledge destination; apply `AGENTS.md`, "Code, Knowledge and Artifacts", and justify new files.
+   For authorized delegation, apply `AGENTS.md`, "Model and Permissions": preserve explicit choices and budgets, use account-scoped evidence or permitted inheritance, and keep model changes separate from rights.
 3. Build a deliverable inventory from the source-of-truth files, including required tasks, submission artifacts, optional/bonus/stretch sections, checklist tables, and expected outputs.
 4. Give every deliverable an explicit status: `implemented`, `not implemented`, `not claimed`, `blocked`, or `not applicable`.
 5. Make scoped changes that match existing project patterns.

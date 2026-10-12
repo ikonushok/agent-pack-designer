@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+## v0.6.0 - 2026-10-12
+
+- Add optional task profiles and model/permission contracts to existing roles, routing and task specs without adding agents. Inherit permitted parent settings when assignment or reliable discovery is unavailable.
+- Discover choices through exposed authenticated runtime tools and match product surface, sign-in method and account/workspace or API project. Record source, observation time and project-selected freshness; do not infer access from plan names, saved configuration or public catalogs.
+- Preserve explicit model/effort choices, user allowlists, budget and quality requirements. New model listings do not automatically become approved candidates. Refresh at boundary changes, expiry or access/quota failure; use bounded, previously approved fallback without assuming remaining quota or lower cost.
+- Add `scripts/resolve_model_policy.py`, an offline JSON resolver for supplied account-scoped evidence. It checks freshness, scope, candidate order, allowlists, failed-model exclusions and reasoning support; returns selection/inheritance proposals or `HOLD`/`BLOCK`, always with runtime verification unclaimed. It does not fetch catalogs, read credentials, call providers or deploy configuration.
+- Add `references/model-policy.md` with role contracts, input schema, synthetic example, current official sources and behavioral acceptance cases. Keep concrete model catalogs out of the portable skill.
+- Separate model choice from read-only, scoped-write and validation-output permission intent. Generate native files only for explicitly targeted supported runtimes; explain Claude/local Codex/hosted differences, session overrides and shell/MCP enforcement limits.
+- Require the shared policy and task evidence fields for newly generated packs while preserving the mature-existing profile for older layouts. Extend scaffold and regression checks.
+
+Validation: see [the 0.6.0 evidence report](reports/validation/model-policy-0.6.0-2026-10-12.md). Offline selection tests and materialized-pack checks do not prove provider availability, quota, cost savings, model quality or runtime permission enforcement. L3-L5 readiness is not claimed.
+
 ## v0.5.0 - 2026-10-12
 
 - Inspect existing implementations and callers before adding code; justify each new file and retained compatibility path.

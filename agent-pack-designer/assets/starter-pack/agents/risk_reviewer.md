@@ -21,6 +21,8 @@ Use only when a task affects {{RISK_TRIGGER}}.
 - Compare claims against actual file changes and command output.
 - Identify the smallest missing validation step.
 
+- When delegation/configuration is in scope, apply `AGENTS.md`, "Model and Permissions": check account/surface evidence, user constraints, fallback bounds and requested versus observed model/rights; static policy does not prove launch or enforcement.
+
 ## Verdicts
 
 - PASS: no blocking issue found and evidence is sufficient for the requested validation level.

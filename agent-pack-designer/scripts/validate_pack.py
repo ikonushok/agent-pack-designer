@@ -69,6 +69,7 @@ REQUIRED_SECTIONS = {
         "Validation",
         "Current validation level:",
         "Code, Knowledge and Artifacts",
+        "Model and Permissions",
     ],
     "CLAUDE.md": [
         "Context Order",
@@ -103,6 +104,8 @@ REQUIRED_SECTIONS = {
         "Residual risk:",
         "Next step and purpose:",
         "Knowledge and integration:",
+        "Model and permission policy:",
+        "Model and permission evidence:",
     ],
     "agents/validation_reviewer.md": [
         "Evidence Levels",

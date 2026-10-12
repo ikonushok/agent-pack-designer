@@ -15,6 +15,7 @@ Fill these fields in the task description, chat or an existing task document; ke
 - Files to avoid:
 - Contracts at risk:
 - Primary agent:
+- Model and permission policy: inheritance or profile/approved choices, runtime/account evidence and freshness, explicit constraints, permission intent and fallback; name unknowns, never save credentials.
 - Optional reviewer:
 - Validation target:
 - Validation method:
@@ -28,6 +29,7 @@ This is response content, not a requirement for a new report file. Begin with th
 
 - Next step and purpose: concrete action and benefit, authorized work or recommendation; if blocked, missing input; if complete, no invented continuation.
 - Knowledge and integration: canonical section updated, integration checked, artifacts kept/closed and remaining consumers.
+- Model and permission evidence: requested/resolved model and effective restrictions if observed; otherwise unverified or not applicable.
 - Validation level achieved:
 - Evidence inspected:
 - Commands run:

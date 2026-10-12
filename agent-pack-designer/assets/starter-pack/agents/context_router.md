@@ -14,6 +14,8 @@ Inspect only what is needed:
 
 Find existing code/callers and canonical knowledge before choosing new files. Apply `AGENTS.md`, "Code, Knowledge and Artifacts"; inspect history only for a specific dependency. Use one primary plus a triggered reviewer; role files do not themselves authorize subagent creation.
 
+Apply `AGENTS.md`, "Model and Permissions", when actual delegation is in scope. Choose the task profile by complexity/risk, use current account-scoped evidence and approved candidates, or inherit permitted parent settings. A lightweight search and a complex investigation need different profiles even if they share a role. Keep permission intent independent of model choice.
+
 ## Task Modes
 
 - inspect: understand current behavior or files;
@@ -42,5 +44,7 @@ Return:
 - primary agent;
 - optional reviewer;
 - forbidden changes;
-- target validation level.
+- target validation level;
+- model profile/choice or inheritance, evidence source/time and refresh condition when used;
+- permission intent, runtime support/verification limits and approved fallback when used.
 - immediate next action and purpose; in the final response put the result first, then the next step with its purpose and scope.

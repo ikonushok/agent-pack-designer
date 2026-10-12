@@ -209,6 +209,8 @@ class ProfileContractTests(unittest.TestCase):
             "Integration and artifact lifecycle:",
             "Next step and purpose:",
             "Knowledge and integration:",
+            "Model and permission policy:",
+            "Model and permission evidence:",
         )
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
@@ -223,20 +225,17 @@ class ProfileContractTests(unittest.TestCase):
                     errors, _warnings = validator.validate_pack(root, require_claude=True)
                     self.assertTrue(any(field in error for error in errors), errors)
 
-    def test_generated_pack_rejects_missing_code_knowledge_artifact_policy(self) -> None:
+    def test_generated_pack_rejects_missing_shared_policies(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             create_materialized_generated_pack(root)
             agents_md = root / "AGENTS.md"
             content = agents_md.read_text(encoding="utf-8")
-            agents_md.write_text(
-                content.replace("Code, Knowledge and Artifacts", "", 1),
-                encoding="utf-8",
-            )
-            errors, _warnings = validator.validate_pack(root, require_claude=True)
-            self.assertTrue(
-                any("Code, Knowledge and Artifacts" in error for error in errors), errors
-            )
+            for section in ("Code, Knowledge and Artifacts", "Model and Permissions"):
+                with self.subTest(section=section):
+                    agents_md.write_text(content.replace(section, "", 1), encoding="utf-8")
+                    errors, _warnings = validator.validate_pack(root, require_claude=True)
+                    self.assertTrue(any(section in error for error in errors), errors)
 
     def test_generated_pack_scans_active_pack_files_but_not_reports(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

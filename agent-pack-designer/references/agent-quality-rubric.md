@@ -25,6 +25,7 @@ Score each item as pass, risk, or fail:
 - Separation: implementation, review, validation, and red-team work are not merged.
 - Evidence: claims distinguish docs, inspected files, and executed commands.
 - Portability: Codex and Claude-specific instructions are separated where needed.
+- Model policy, when used: choices cite fresh evidence for the actual account/surface, respect explicit user constraints and have bounded fallback; permissions are verified separately from model selection. A role file or public model catalog is not proof of runtime access.
 - Minimality: removing the agent would create real duplication or risk.
 - Routing: every trigger-only agent is reachable from `context_router.md` or an equivalent routing matrix.
 - Completion: the primary checks integration, temporary/transition artifacts and active links before declaring completion.
@@ -54,6 +55,8 @@ Use a relevant real or isolated case to assess decisions and resulting artifacts
 | New decision needed by another session | Existing canonical section updated; references remain current; decision can be found without chat history | Decision exists only in chat or contradictory copies |
 | Reproducible experiment or required preflight | Frozen versions/inputs/commands/results/limits retained in one evidence set; reviewers reference it | Evidence discarded to reduce files, overwritten, or duplicated for each review |
 | Authorized cleanup with an active consumer | Dependencies/processes checked; required inputs kept available; map/integrity recorded for completed moves, deferred items have a condition | Live input/code moved, process stopped merely for tidiness, or archive declared proof of integration |
+
+Use [model-policy behavioral acceptance](model-policy.md#behavioral-acceptance) when model selection or permission enforcement is claimed. Offline resolver tests do not prove provider access, model quality, quota or runtime restrictions.
 
 ## Mature Pack Exception
 

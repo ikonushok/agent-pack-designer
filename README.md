@@ -21,6 +21,7 @@ New to agent packs or not comfortable with terminal setup? Start with [For Non-T
 - [Install For Codex](#install-for-codex)
 - [For Non-Technical Users](#for-non-technical-users)
 - [Use With Claude Code](#use-with-claude-code)
+- [Model And Permission Policy](#model-and-permission-policy)
 - [Expected Output](#expected-output)
 - [Validation Levels](#validation-levels)
 - [Validate](#validate)
@@ -94,11 +95,11 @@ For a customer-facing audit report:
 
 ## Status
 
-Version: 0.5.0
+Version: 0.6.0
 
-Current release `v0.5.0`: code reuse, durable knowledge, justified reports, integration and artifact lifecycle checks.
+Current release `v0.6.0`: optional model profiles, account-scoped availability evidence, bounded fallback and separate permission contracts.
 
-Changes and validation for v0.5.0 are recorded in [the changelog](CHANGELOG.md#v050---2026-10-12). The skill has L0 static checks, repository regression checks and L2 structural consistency for materialized templates. Independent execution of the four new behavioral scenarios and L3-L5 checks for this version remain unperformed. Existing project packs are not automatically migrated.
+Changes and validation for v0.6.0 are recorded in [the changelog](CHANGELOG.md#v060---2026-10-12). Validation evidence and remaining checks are recorded in [the version report](reports/validation/model-policy-0.6.0-2026-10-12.md). Existing project packs are not automatically migrated; native configuration, account access, model quality, quota and permission enforcement require runtime evidence.
 
 Historical evidence for earlier versions is recorded in [`reports/validation/`](reports/validation/):
 
@@ -110,7 +111,7 @@ Historical evidence for earlier versions is recorded in [`reports/validation/`](
 
 Scope boundaries:
 
-- Historical L5 evidence applies to the package version and release surface inspected in its report; it does not establish L5 for v0.5.0.
+- Historical L5 evidence applies to the package version and release surface inspected in its report; it does not establish L5 for v0.6.0.
 - [`validate_pack.py`](agent-pack-designer/scripts/validate_pack.py) with `--profile generated-pack` proves L2 structural consistency for a generated pack. It does not prove target-project runtime behavior.
 - Runtime, production, deployment, model-quality, or project-specific claims require separate command output or recorded evidence.
 
@@ -145,6 +146,7 @@ The installable skill folder contains:
       assets/starter-pack/
       scripts/validate_skill.py
       scripts/validate_pack.py
+      scripts/resolve_model_policy.py
 
 ## For Non-Technical Users
 
@@ -182,6 +184,16 @@ Claude Code can use:
 Example prompt:
 
     Use this repository to design a minimal Codex/Claude agent pack for my project. Keep the pack small and state validation level.
+
+## Model And Permission Policy
+
+Model assignment is optional. Generated packs default to permitted parent-model inheritance. When actual subagents are useful, define task profiles, user-approved candidates, reasoning requirements, permission intent and fallback in the existing project policy. Simple search and complex research can use different profiles without adding another role.
+
+Concrete choices need current evidence for the actual product surface, sign-in method and account/workspace or API project. Use supported discovery tools exposed by that runtime; a plan name or public model catalog does not establish access. When discovery is unavailable, preserve permitted parent settings and state the limitation. Preserve explicit choices, budgets and quality requirements; new model listings do not automatically change the project.
+
+The optional [offline resolver](agent-pack-designer/scripts/resolve_model_policy.py) evaluates supplied normalized policy/catalog JSON. It checks provenance context, freshness, approved candidates, allowlists and reasoning support, returning a proposal or `HOLD`/`BLOCK`. It does not authenticate or fetch catalogs, launch agents, install hooks or change settings. Discovery remains an instruction-driven workflow unless the target environment exposes a supported adapter. See [the input contract and example](agent-pack-designer/references/model-policy.md#optional-deterministic-resolver).
+
+Generate native Claude Code or local Codex configuration only when that runtime is requested and its installed schema is supported. Model selection never expands rights. A read-only prompt or static configuration does not prove shell/MCP/external-service protection, and validation may legitimately need an allowed cache/output location. Hosted ChatGPT Work controls differ from local configuration. See [model and permission policy](agent-pack-designer/references/model-policy.md) for boundaries, official sources and behavioral acceptance.
 
 ## Expected Output
 
@@ -298,6 +310,7 @@ Public/installable skill files are kept in English. Russian validation reports a
   - [`assets/starter-pack/`](agent-pack-designer/assets/starter-pack/)
   - [`scripts/validate_skill.py`](agent-pack-designer/scripts/validate_skill.py)
   - [`scripts/validate_pack.py`](agent-pack-designer/scripts/validate_pack.py)
+  - [`scripts/resolve_model_policy.py`](agent-pack-designer/scripts/resolve_model_policy.py) — offline model-selection proposals
 - [`CHANGELOG.md`](CHANGELOG.md)
 - [`reports/validation/`](reports/validation/)
 - [`README.md`](README.md)
@@ -306,9 +319,9 @@ Public/installable skill files are kept in English. Russian validation reports a
 
 ## Release Notes
 
-0.5.0 is tagged as the code, knowledge and artifact lifecycle update. See [the changelog](CHANGELOG.md#v050---2026-10-12) for the concrete changes and validation limits.
+0.6.0 is tagged as the model and permission policy update. See [the changelog](CHANGELOG.md#v060---2026-10-12) for the concrete changes and [validation evidence](reports/validation/model-policy-0.6.0-2026-10-12.md) for checks actually performed.
 
-The update adds reuse and knowledge destinations to task specs, keeps completion reports in chat unless a saved artifact has a purpose, and checks integration and consumers before completion or archival. Generated packs must include the new contracts; mature packs retain flexible layouts. The four rubric scenarios describe behavioral acceptance criteria and have not yet been independently exercised for this version.
+The update extends existing roles and task contracts with optional model profiles, current account-scoped discovery guidance, explicit constraints, bounded fallback and permission verification boundaries. The included resolver proposes choices from supplied evidence and keeps runtime verification unclaimed. No provider catalog is embedded, no new role is added, and existing packs are not automatically migrated. It retains the code, knowledge and artifact lifecycle contracts from 0.5.0.
 
 Remaining post-0.3 work:
 

@@ -11,19 +11,12 @@ Turn project context into a small, usable agent pack with explicit evidence.
 
 At the start of a task, read `VERSION` in this skill directory to identify the installed package version. Include that version in validation reports, audits, release-readiness assessments, and compatibility diagnosis when it helps trace the result. Do not add it to ordinary user-facing replies unless it is relevant.
 
-## Changes in 0.5.0 (from 0.4.0)
+## Changes in 0.6.0
 
-The concrete changes from 0.4.0 are:
-
-- **Code reuse:** inspect existing implementations and callers before adding files; justify new files and retained compatibility paths.
-- **Durable knowledge:** keep cross-session decisions in one maintained source and link to it; separate current instructions from historical evidence.
-- **Reports:** a completion report is normally a chat response. Save a separate report when requested or needed for reproducibility; preserve required experiment/preflight evidence without duplicating it across reviewers.
-- **Artifact lifecycle:** distinguish live code, permanent inputs, generated outputs and frozen source snapshots. Before authorized archival, check consumers, running processes, provenance, path mappings and byte preservation; age alone is not a reason to archive.
-- **Completion:** verify integration through entrypoints, imports, callers, CLI, configuration and documentation; explain the next concrete action and its purpose, distinguishing recommendations from authorized work.
-- **Templates and validators:** centralize the policy in starter `AGENTS.md`; update existing roles and task-spec fields for reuse, knowledge, integration/lifecycle and next steps. Require these contracts for newly generated packs while retaining the flexible mature-pack profile for older layouts.
-- **Behavioral acceptance:** add four rubric scenarios: ordinary verification without an unnecessary report; a durable decision in its canonical document; frozen experiment evidence; cleanup with an active consumer. Structural validation does not prove these behaviors.
-
-Updated files: `SKILL.md`, `VERSION`, `references/design-workflow.md`, `references/agent-quality-rubric.md`, `scripts/validate_pack.py`, `scripts/validate_skill.py`, and the seven existing Markdown templates under `assets/starter-pack/`. No new agent roles were added; existing project packs are not automatically migrated.
+- Add optional role-level model profiles, account-scoped availability evidence, explicit user constraints and bounded fallback rules.
+- Separate model selection from permission intent and effective runtime enforcement across Claude Code, local Codex and hosted environments.
+- Add an offline resolver for supplied policy/catalog evidence; it proposes choices without discovering credentials, launching agents or changing settings.
+- Extend existing routing/task/review templates without adding roles. See [model policy](references/model-policy.md) for the contract, examples and validation limits; repository release notes preserve earlier changes.
 
 ## Default Output Shape
 
@@ -58,11 +51,12 @@ Many agents are acceptable for mature projects only when `context_router.md` kee
 2. Read only the references needed for the current job:
    - `references/spec-discovery.md` to locate specifications and extract project requirements from Spec Kit, ordinary docs, or README sections.
    - `references/design-workflow.md` when generating or restructuring a pack.
+   - `references/model-policy.md` when assigning models, subagent permissions or runtime configuration; leave inheritance in place when this is not needed.
    - `references/agent-quality-rubric.md` when reviewing agent quality.
    - `references/validation-levels.md` before assigning L0-L5 or release readiness.
 3. Build a deliverable coverage inventory from discovered specifications and other source-of-truth files, with source references, acceptance criteria, non-goals, constraints, and validation expectations. Include required, submission, optional, bonus, extra-credit, stretch, artifact, table, and checklist sections. Every deliverable must be represented in the primary workflow, reviewer checklist, or explicit non-goal/status.
 4. Choose the smallest useful pack. Include one primary agent and validation reviewer; add a risk or domain reviewer only when it has a distinct trigger, inputs, checklist, output, stop rule, and routing entry.
-5. Fill the starter templates with project-specific names, files, commands, forbidden changes, and acceptance criteria. Add a completion contract: reuse existing code, justify new files, choose canonical knowledge destinations, check integration and artifact lifecycle, and name the next step with its purpose. Use the project's existing layout; [references/design-workflow.md](references/design-workflow.md#6-define-contracts) defines the decisions to encode. These criteria do not add approval gates or permission to clean up unrelated files.
+5. Fill the starter templates with project-specific names, files, commands, forbidden changes, and acceptance criteria. Add a completion contract: reuse existing code, justify new files, choose canonical knowledge destinations, check integration and artifact lifecycle, and name the next step with its purpose. Use the project's existing layout; [references/design-workflow.md](references/design-workflow.md#6-define-contracts) defines the decisions to encode. These criteria do not add approval gates or permission to clean up unrelated files. When actual subagents are in scope, define model profiles, evidence freshness, user constraints, permission intent and approved fallback in the existing policy destination. Discover availability through exposed account-scoped runtime tools; never infer it from a plan name or public catalog. Generate native configuration only for a named supported runtime. The optional `scripts/resolve_model_policy.py` evaluates supplied evidence; it does not perform discovery or deployment.
 6. Select the validation profile before running static checks:
    - `generated-pack` for a materialized project pack;
    - `mature-existing-pack` for an established project with equivalent role names or layouts;
@@ -82,6 +76,7 @@ Use chat for transient verification status. Save cross-session knowledge in its 
 - Optional/future agents are not the same as optional, bonus, extra-credit, stretch, or additional project deliverables. Do not silently omit optional deliverables from the project workflow; include explicit status such as `implemented`, `not implemented`, `not claimed`, or `blocked`.
 - For mature projects, allow multiple trigger-only domain agents when a router prevents loading them all by default.
 - Keep implementation, review, validation, and red-team responsibilities separate.
+- A role file does not select a model or authorize delegation. Preserve explicit user choices; inherit permitted parent settings when availability is unknown. Model changes do not expand permissions. Validate actual launch/enforcement separately from policy or static configuration; use [model policy](references/model-policy.md) only when this work is relevant.
 - Keep agents project-specific. Avoid generic agents that could apply to every repository.
 - Put rare or speculative roles outside the default pack or omit them.
 - Use concise, imperative instructions. Make triggers and stop rules explicit.

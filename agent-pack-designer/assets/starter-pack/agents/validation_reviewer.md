@@ -22,6 +22,8 @@ Goal: check whether evidence is sufficient for the claimed validation level.
 - Confirm required experiment/preflight evidence remains available, snapshots are distinguished from live code, and cleanup preserves active consumers and frozen provenance. The review does not authorize unrelated edits or process stops.
 - Confirm the completion response gives the result, then a concrete next step and its purpose with scope; this review does not require a new report file.
 
+- When delegation/configuration is in scope, apply `AGENTS.md`, "Model and Permissions": check account/surface evidence, user constraints, fallback bounds and requested versus observed model/rights; static policy does not prove launch or enforcement.
+
 ## Verdicts
 
 - PASS: evidence supports the claimed level.

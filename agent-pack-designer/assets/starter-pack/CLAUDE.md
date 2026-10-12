@@ -21,6 +21,8 @@ This file is the Claude Code project memory. Keep it concise and load extra docs
 - State the validation level L0-L5 in the completion response; a report format does not require a new file.
 - Apply the shared Code, Knowledge and Artifacts policy from AGENTS.md; give the result, then the next step and its purpose without expanding authorization.
 
+- Apply Model and Permissions from AGENTS.md. Native subagent model/tool configuration belongs to supported Claude Code agent frontmatter; shared Markdown roles alone do not activate it. Keep inheritance when no assignment is needed and verify shell/MCP paths separately before claiming read-only enforcement.
+
 ## Validation
 
 Use the project commands listed in `agents/context_router.md` when available. Do not claim a command passed unless it was actually run and the result was inspected.

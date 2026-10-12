@@ -23,6 +23,14 @@ This file is the project-specific contract for Codex.
 - Follow the existing project layout for live code, permanent inputs, results and archives. Preserve source snapshots used as evidence. Avoid new permanent imports/input dependencies on disposable report directories; expose another frozen input version explicitly when needed.
 - Archive only in authorized scope after checking callers, configs, commands, links, frozen provenance and active consumers. Preserve needed inputs/human evidence, verify preservation, map old/new paths and update current references. Keep historical hashes intact. Preserve active consumers and record deferred migration conditions; age alone is not a removal criterion.
 
+## Model and Permissions
+
+- Default: inherit the primary agent's model and reasoning settings when compatible with user constraints; no extra subagent is required. Role files do not switch models or authorize delegation.
+- When model assignment is useful, maintain approved task profiles/candidates, explicit user choices, budget limits, evidence source/time/freshness and fallback in this section or the existing runtime configuration. Discover choices through exposed account-scoped runtime tools; match surface, sign-in method and identity. A plan name, public catalog or saved model setting does not prove access.
+- Treat unavailable/stale evidence as unknown; inherit a permitted parent or identify the missing input. Preserve explicit model/effort requirements. Refresh at session/identity changes, expiry or failure; use only approved fallback and stop repeated failures after one refresh/reselection attempt. Do not silently expand cost, lower required quality or adopt a newly listed model.
+- Keep model selection separate from rights: research/review normally reads, authorized implementation writes within scope, and validation may need caches/output in an allowed location. More reasoning does not grant more permissions.
+- Native model/tool/sandbox configuration applies only to the named supported runtime. Report requested versus resolved model and permission intent versus observed enforcement. Do not claim read-only protection from prompt wording or Write/Edit denial while shell/MCP mutation paths remain available.
+
 ## Forbidden Changes
 
 - Do not broaden scope without user approval.

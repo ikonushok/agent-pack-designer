@@ -103,6 +103,8 @@ Put the shared policy in generated `AGENTS.md`, with actual project paths and co
 - Before authorized archival, inspect reverse references, frozen provenance/hash contracts and active consumers/processes. Preserve needed inputs and human evidence, record old/new paths, verify preservation and update active links. Preserve historical hashes; version a changed producer/plan instead of relabeling its frozen history. If a consumer is active, leave its files in place and record the condition for later migration; do not stop it merely to tidy a directory.
 - Start the final response with the result, immediately followed by a concrete next step and why it helps. Identify whether that step is already authorized work or a recommendation; if complete with no useful continuation, say so. At a blocker, name the missing input and how to obtain it. Do not invent follow-up work or substitute "I can continue" for an actionable step.
 
+When actual subagents or runtime configuration are in scope, apply [Model and Permission Policy](model-policy.md): assign task profiles, discover current account/surface-scoped choices using exposed supported tools, preserve explicit choices and budgets, and define evidence refresh and bounded fallback. Separate permission intent from effective enforcement. Keep inheritance as the default when this configuration adds no value. Reuse existing roles and policy files; model selection does not justify another agent or automatically authorize delegation.
+
 ## 7. Validate and Report
 
 Finish with:
